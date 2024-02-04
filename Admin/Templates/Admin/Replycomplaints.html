@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prpfessional Complaint Reply</title>
+</head>
+<body>
+    <br><br><br><br><br>
+    <h1 align="center"><b>COMPLAINT REPLY</b></h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="6">
+            <tr align="center">
+                <td>Complaint Reply</td>
+                <td><textarea name="txt_reply" id="" cols="30" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Reply"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'webadmin:complaints' %}"
+</script>
+{% endif %}

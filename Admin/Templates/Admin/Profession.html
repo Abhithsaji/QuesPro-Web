@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profession</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Enter Profession</td>
+                <td><input type="text" name="txt_profession" value="{{profession_data.profession_name}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Save"></td>
+            </tr>
+
+            <tr>
+                <td>Sl.No</td>
+                <td>Profession</td>
+                <td>Action</td>
+            </tr>
+            {% for i in profession %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.Profession.profession_name}}</td>
+                <td>
+                    <a href="{% url 'webadmin:delprofession' i.id %}">Delete</a>
+                    <a href="{% url 'webadmin:updateprofession' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

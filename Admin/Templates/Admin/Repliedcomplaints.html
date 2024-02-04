@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Complaints</title>
+</head>
+<body>
+    <br><br><br><br><br>
+    <h1 align="center"><b> USER COMPLAINTS</b></h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr align="center">
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Complaint Type</th>
+                <th>Complaint</th>
+                <th>Complaint Date</th>
+                <th>Replied Date</th>
+                <th>Edit Reply</th>
+            </tr>
+            {% for i in urcomplaintdata %}
+            <tr align="center">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.username.user_name}}</td>
+                <td>{{ i.ucomplainttype.complainttype_name }}</td>
+                <td>{{ i.usercomplaints.complaint_name}}</td>
+                <td>{{ i.usercomplaints.complaint_date}}</td>
+                <td>{{ i.usercomplaints.reply_date}}</td>
+                <td><a href="{% url 'webadmin:replycomplaints' i.id %}">{{ i.usercomplaints.complaint_reply}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h1 align="center"><b> PROFESSIONAL COMPLAINTS</b></h1>
+
+        <table align="center" border="1">
+            <tr align="center">
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Complaint Type</th>
+                <th>Complaint</th>
+                <th>Complaint Date</th>
+                <th>Replied Date</th>
+                <th>Edit Reply</th>
+            </tr>
+            {% for j in prcomplaintdata %}
+            <tr align="center">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ j.profname.professional_name}}</td>
+                <td>{{ j.pcomplainttype.complainttype_name }}</td>
+                <td>{{ j.profcomplaints.complaint_name}}</td>
+                <td>{{ j.profcomplaints.complaint_date}}</td>
+                <td>{{ j.profcomplaints.reply_date}}</td>
+                <td><a href="{% url 'webadmin:replycomplaints' j.id %}">{{ j.profcomplaints.complaint_reply}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

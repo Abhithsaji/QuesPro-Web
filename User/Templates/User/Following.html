@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pro-card1 {
+            padding: 13px;
+            background-color: #5bfe8c;
+            width: fit-content;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-radius: 11px;
+        }
+        .pro-card2 {
+            padding: 13px;
+            background-color:  #ff32326e;
+            width: fit-content;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-radius: 11px;
+        }
+        .pro-card3 {
+            padding: 13px;
+            background-color: #B3E5FC;
+            width: fit-content;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-radius: 11px;
+        }
+        .main-card {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+        img {
+            border-radius: 10px;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        .loader-con {
+            position: absolute;
+            display: none;
+            flex-direction: row;
+            width: 1537px;
+            justify-content: center;
+            height: 777px;
+            margin-top: -11px;
+            margin-left: -10px;
+            align-items: center;
+            background-color: #ffffffc2;
+        }
+
+
+        .loader {
+            --w:10ch;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 30px;
+            line-height: 1.4em;
+            letter-spacing: var(--w);
+            width: var(--w);
+            overflow: hidden;
+            white-space: nowrap;
+            color: #0000;
+            text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000;
+            animation: l20 2s infinite linear;
+            }
+            .loader:before {
+            content:"Loading...";
+            }
+
+            @keyframes l20 {
+            9.09% {text-shadow: 
+                    calc( 0*var(--w)) -10px #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            18.18% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) -10px #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            27.27% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) -10px #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            36.36% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) -10px #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            45.45% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) -10px #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            54.54% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) -10px #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            63.63% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) -10px #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            72.72% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) -10px #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) 0 #000}
+            81.81% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) -10px #000,calc(-9*var(--w)) 0 #000}
+            90.90% {text-shadow: 
+                    calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
+                    calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) -10px #000}
+            }
+            hr {
+                border: 1px solid #e3e3e3;
+                width: 546px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+    </style>
+</head>
+<div class="loader-con" id="loader-data">
+    <div class="loader"></div>
+</div>
+<body>
+    <br><br>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="main-card" id="sel_professional">
+            {% for a in accepted %}
+            <div class="pro-card1">
+                <div><img src="{{ a.aprofessional.professional_photo }}" width="150" height="150" alt=""></div>
+                <div class="details">
+                    <div> <b>Name</b> :{{ a.aprofessional.professional_name }}</div>
+                    <div><b>Pro</b> :{{a.aprofession.profession_name}}</div>
+                    <div> <b>Spe</b> :{{ a.aprofessional.professional_specification }}</div>
+                    <div><b>About</b> :{{ a.aprofessional.professional_about }}</div>
+                    <div><a href="{% url 'webuser:professionalprofile' a.id %}">View More</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+<hr>
+        <div class="main-card" id="sel_professional">
+            {% for i in rejected %}
+            <div class="pro-card2">
+                <div><img src="{{ i.rprofessional.professional_photo }}" width="150" height="150" alt=""></div>
+                <div class="details">
+                    <div> <b>Name</b> :{{ i.rprofessional.professional_name }}</div>
+                    <div><b>Pro</b> :{{i.rprofession.profession_name}}</div>
+                    <div> <b>Spe</b> :{{ i.rprofessional.professional_specification }}</div>
+                    <div><b>About</b> :{{ i.rprofessional.professional_about }}</div>
+                    <div>you are added to the waiting list.</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+
+        <div class="main-card" id="sel_professional">
+            {% for f in following %}
+            <div class="pro-card3">
+                <div><img src="{{ f.professional.professional_photo }}" width="150" height="150" alt=""></div>
+                <div class="details">
+                    <div> <b>Name</b> :{{ f.professional.professional_name }}</div>
+                    <div><b>Pro</b> :{{f.profession.profession_name}}</div>
+                    <div> <b>Spe</b> :{{ f.professional.professional_specification }}</div>
+                    <div><b>About</b> :{{ f.professional.professional_about }}</div>
+                    <div>You are not been accepted yet</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Professional List</title>
+</head>
+<body>
+    <br><br><br>
+    <h1 align="center"><b>APPROVED PROFESSIONALS</b></h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="5" width="95%" height="30px">
+            <tr align="center">
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <th>Aadhar No</th>
+                <th>Aadhar Photo</th>
+                <th>Profession</th>
+                <th>specification</th>
+                <th>About</th>
+                <th>Action</th>
+            </tr>
+            {% for i in approveddata %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.professional.professional_name}}</td>
+                <td>{{i.professional.professional_email}}</td>
+                <td>{{i.professional.professional_contact}}</td>
+                <td>{{i.professional.professional_address}}</td>
+                <td><a href="{{i.professional.professional_photo}}"><img src="{{i.professional.professional_photo}}" alt="" width="50px" height="50px"></a></td>
+                <td>{{i.professional.professional_aadharno}}</td>
+                <td><a href="{{i.professional.professional_proof}}"><img src="{{i.professional.professional_proof}}" alt="" width="50px" height="30px"></a></td>
+                <td>{{i.prof_name.profession_name}}</td>
+                <td>{{i.professional.professional_specification}}</td>
+                <td>{{i.professional.professional_about}}</td>
+                <td><a href="{% url 'webadmin:rejectprofessionals' i.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

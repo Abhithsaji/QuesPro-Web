@@ -1,0 +1,14 @@
+<div class="main-card" id="sel_professional">
+    {% for i in professionalsdata %}
+    <div class="pro-card">
+        <div><img src="{{ i.professional.professional_photo }}" width="150" height="150" alt=""></div>
+        <div class="details">
+            <div> <b>Name</b> :{{ i.professional.professional_name }}</div>
+            <div><b>Pro</b> :{{i.pro.profession_name}}</div>
+            <div> <b>Spe</b> :{{ i.professional.professional_specification }}</div>
+            <div><b>About</b> :{{ i.professional.professional_about }}</div>
+            <div><a href="">Send Request</a></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

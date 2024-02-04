@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br><br><br><br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr align="center">
+                <th>Sl.No</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Booking Status</th>
+            </tr>
+            {% for i in appoinmentdata %}
+            <tr align="center">
+                <td>{{forloop.counter}}</td>
+                <td><a href="{{i.professional.professional_photo}}"><img src="{{i.professional.professional_photo}}" alt="" width="50px"></a></td>
+                <td>{{i.professional.professional_name}}</td>
+                <td>{{i.professional.professional_email}}</td>
+
+                {% if i.appoinment.astatus == 0 %}
+                <td>Your request is pending.</td>
+
+                {% elif i.appoinment.astatus == 1 %}
+                <td>Appoinment accepted. <a href="">Pay now</a></td>
+
+                {% else %}
+                <td>Your request was rejected.</td>
+                {% endif %}
+            </tr> 
+            {% endfor %}           
+        </table>
+    </form>
+</body>
+</html>

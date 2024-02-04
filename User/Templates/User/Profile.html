@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><br><br><br><br>
+    <h1 align="center"><b>PROFILE</b></h1>
+    <form action="" method="post">
+        <table align="center" border="4">
+            <tr>
+                <td colspan="2" align="center"><img src="{{user.photo_url}}" alt="Profile Picture" width="200px" height="200px"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{user.user_name}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{user.user_email}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{user.user_contact}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{user.user_address}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a href="{% url 'webuser:editprofile' %}">Edit Profile</a></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a href="{% url 'webuser:changepassword' %}">Change Password</a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

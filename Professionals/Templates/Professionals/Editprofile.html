@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><br><br><br><br>
+    <h1 align="center">EDIT PROFILE</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="4">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" value="{{professional.professional_name}}" id=""></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact" value="{{professional.professional_contact}}" id=""></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="txt_address" value="{{professional.professional_address}}" id=""></td>
+            </tr>
+            <tr>
+                <td>About</td>
+                <td><input type="text" name="txt_about" value="{{professional.Professional_about}}" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Edit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

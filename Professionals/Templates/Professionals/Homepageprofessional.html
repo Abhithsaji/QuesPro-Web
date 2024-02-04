@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table align="center" width="100%" height="50px">
+            <tr align="center">
+                <td><a href="{% url 'webprofessionals:profile' %}"> Profile</a>
+                <td><a href="{% url 'webprofessionals:newrequest' %}">New Requests</a></td>
+                <td><a href="{% url 'webprofessionals:acceptedrequest' %}">Followers</a></td>
+                <td><a href="{% url 'webprofessionals:rejectedrequest' %}">Waiting List</a></td>
+                <td><a href="{% url 'webprofessionals:viewappoinments' %}">View Appoinment</a></td>
+                <td>Chat</td>
+                <td><a href="{% url 'webprofessionals:complaints' %}">Complaint</a> </td>
+                <td><a href="{% url 'webprofessionals:feedback' %}"> Feedback</a></td>
+                <td>Logout</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
