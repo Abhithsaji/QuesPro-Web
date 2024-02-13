@@ -95,28 +95,33 @@ def userregistration(request):
 
         email = request.POST.get("txt_email")
         password = request.POST.get("txt_password")
+        confpass = request.POST.get("txt_confpass")
 
-        try:
-            user = firebase_admin.auth.create_user(email=email,password=password)
-        except(firebase_admin._auth_utils.EmailAlreadyExistsError,ValueError) as error:
-            return render(request,"Guest/Userregistration.html",{"msg":error})
+        if password == confpass:
+            try:
+                user = firebase_admin.auth.create_user(email=email,password=password)
+            except(firebase_admin._auth_utils.EmailAlreadyExistsError,ValueError) as error:
+                return render(request,"Guest/Userregistration.html",{"msg":error})
 
-        # FILE upload
+            # FILE upload
 
-        image = request.FILES.get("file_photo")
-        if image:
-            path = "Photo/" + image.name
-            sd.child(path).put(image)
-            download_url = sd.child(path).get_url(None)
+            image = request.FILES.get("file_photo")
+            if image:
+                path = "Photo/" + image.name
+                sd.child(path).put(image)
+                download_url = sd.child(path).get_url(None)
 
 
-        # Data Insertion
+            # Data Insertion
+            
+            data = {"user_name":request.POST.get("txt_name"),"user_email":email,"user_contact":request.POST.get("txt_contact"),
+            "user_address":request.POST.get("txt_address"),"user_gender":request.POST.get("rad_gender"),"user_dob":request.POST.get("date_dob"),
+            "place_id":request.POST.get("sel_place"),"photo_url":download_url,"user_id":user.uid,"vstatus":1}
+            
+            db.collection("tbl_user").add(data)
+            return render(request,"Guest/Userregistration.html")
+
         
-        data = {"user_name":request.POST.get("txt_name"),"user_email":email,"user_contact":request.POST.get("txt_contact"),
-        "user_address":request.POST.get("txt_address"),"place_id":request.POST.get("sel_place"),"photo_url":download_url,"user_id":user.uid,"vstatus":1}
-        
-        db.collection("tbl_user").add(data)
-        return render(request,"Guest/Userregistration.html")
     else:
         return render(request,"Guest/Userregistration.html",{"district_data":dis_data})
 
