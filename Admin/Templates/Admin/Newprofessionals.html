@@ -22,6 +22,8 @@
                 <th>Aadhar Photo</th>
                 <th>Profession</th>
                 <th>specification</th>
+                <th>DOB</th>
+                <th>Gender</th>
                 <th>About</th>
                 <th colspan="2">Action</th>
             </tr>
@@ -37,6 +39,8 @@
                 <td><a href="{{i.professional.professional_proof}}"><img src="{{i.professional.professional_proof}}" alt="" width="50px" height="30px"></a></td>
                 <td>{{i.prof_name.profession_name}}</td>
                 <td>{{i.professional.professional_specification}}</td>
+                <td>{{i.professional.professional_dob}}</td>
+                <td>{{i.professional.professional_gender}}</td>
                 <td>{{i.professional.professional_about}}</td>
                 <td><a href="{% url 'webadmin:aproveprofessionals' i.id %}">Accept</a></td>
                 <td><a href="{% url 'webadmin:rejectprofessionals' i.id %}">Reject</a></td>

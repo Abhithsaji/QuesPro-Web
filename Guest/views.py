@@ -72,7 +72,8 @@ def Professionalregistration(request):
         data = {"professional_name":request.POST.get("txt_name"),"professional_email":email,"professional_contact":request.POST.get("txt_contact"),
                 "professional_address":request.POST.get("txt_address"),"place_id":request.POST.get("sel_place"),"professional_photo":downloadphoto_url,
                 "professional_proof":downloadaadhar_url,"profession_id":request.POST.get("sel_profession"),"professional_about":request.POST.get("txt_about"),
-                "professional_id":user.uid,"professional_specification":request.POST.get("txt_specification"),"professional_aadharno":request.POST.get("txt_aadharno"),"vstatus":0}
+                "professional_id":user.uid,"professional_specification":request.POST.get("txt_specification"),"professional_aadharno":request.POST.get("txt_aadharno"),"vstatus":0,
+                "professional_gender":request.POST.get("rad_gender"),"professional_dob":request.POST.get("date_dob"),}
         db.collection("tbl_professional").add(data)
         return render(request,"Guest/Professionalregistration.html")
     else:

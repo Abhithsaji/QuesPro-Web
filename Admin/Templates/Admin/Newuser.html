@@ -17,6 +17,8 @@
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Address</th>
+                <th>DOB</th>
+                <th>Gender</th>
                 <th>Photo</th>
             </tr>
             {% for i in userdata %}
@@ -26,6 +28,8 @@
                 <td>{{i.user.user_email}}</td>
                 <td>{{i.user.user_contact}}</td>
                 <td>{{i.user.user_address}}</td>
+                <td>{{i.user.user_dob}}</td>
+                <td>{{i.user.user_gender}}</td>
                 <td><a href="{{i.user.photo_url}}"><img src="{{i.user.photo_url}}" alt="" width="40px" height="50px"></a></td>
                 <!-- <td><a href="">Accept</a></td>
                 <td><a href="">Reject</a></td> -->

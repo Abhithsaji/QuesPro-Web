@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    <br><br><br><br>
+    <h1 align="center"><b>PROFESSIONAL REGISTRATION</b></h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
+        <table align="center">
             <tr>
                 <td>Name</td>
                 <td><input type="text" name="txt_name" id=""></td>
@@ -38,9 +40,17 @@
                 <td><input type="text" name="txt_aadharno" id=""></td>
             </tr>
             <tr>
-                <td>Specification</td>
-                <td><input type="text" name="txt_specification" id=""></td>
+                <td>Gender</td>
+                <td>Male<input type="radio" name="rad_gender" value="Male" id="">
+                    Female<input type="radio" name="rad_gender" value="Female" id="">
+                    Other<input type="radio" name="rad_gender" value="Other" id="">
+                </td>
             </tr>
+            <tr>
+                <td>DOB</td>
+                <td><input type="date" name="date_dob" id=""></td>
+            </tr>
+            
             <tr>
                 <td>About</td>
                 <td><textarea name="txt_about" id="" cols="30" rows="10"></textarea></td>
@@ -53,6 +63,10 @@
                     <option value="{{p.id}}">{{p.profession.profession_name}}</option>
                     {% endfor %}
                 </select></td>
+            </tr>
+            <tr>
+                <td>Specification</td>
+                <td><input type="text" name="txt_specification" id=""></td>
             </tr>
             <tr>
                 <td>Select District</td>
@@ -75,8 +89,9 @@
                 <td>Enter Password</td>
                 <td><input type="password" name="txt_password" id=""></td>
             </tr>
+
             <tr>
-                <td colspan="2"><input type="submit" value="Register"></td>
+                <td colspan="2" align="center"><input type="submit" value="Register"></td>
             </tr>
         </table>
     </form>
