@@ -16,5 +16,6 @@ urlpatterns = [
     path('Sendappoinment/<str:id>',views.sendappoinment,name="sendappoinment"),
     path('Professionalprofile/<str:id>',views.professionalprofile,name="professionalprofile"),
     path('Viewappoinment/',views.viewappoinment,name="viewappoinment"),
+    # path('Viewcomplaints/',views.viewcomplaints,name="viewcomplaints"),
 
 ]

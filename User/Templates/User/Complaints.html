@@ -17,7 +17,8 @@
                         {% for i in comptypedata %}
                         <option value="{{i.id}}">{{i.complainttype.complainttype_name}}</option>
                         {% endfor %}
-                    </select></td>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Complaint</td>
@@ -31,16 +32,22 @@
         <table align="center" border="5">
             <tr>
                 <th>Sl.No</th>
+                <th>Complaint Date</th>
                 <th>Complaint Type</tn>
                 <th>Complaint</th>
-                <th>Action</th>
+                <th>Reply</th>
+                <th>Reply Date</th>
             </tr>
+            {% for j in complaintdata  %}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ j.complaint.complaint_date}}</td>
+                <td>{{ j.com.complainttype_name }}</td>
+                <td>{{ j.complaint.complaint_name }}</td>
+                <td>{{ j.complaint.complaint_reply }}</td>
+                <td>{{ j.complaint.reply_date}}</td>
             </tr>
+            {% endfor %}
         </table>
     </form>
 </body>

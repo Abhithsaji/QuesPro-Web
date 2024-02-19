@@ -43,23 +43,32 @@ def changepassword(request):
     return redirect("webprofessionals:homepageprofessional")
 
 def complaints(request):
+    compdata = db.collection("tbl_complaint").where("professional_id","==",request.session["pid"]).stream()
+    comp_data = []
+    for c in compdata:
+        data = c.to_dict()
+        complainttype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
+        comp_data.append({"complaint":data,"id":c.id,"com":complainttype})
+
     comptype = db.collection("tbl_complainttype").stream()
     comptype_data = []
     for i in comptype:
         data = i.to_dict()
         comptype_data.append({"complainttype":data,"id":i.id})
     if request.method == "POST":
-        data = {"professional_id":request.session["pid"],
-                "user_id":"",
+        pid = request.session["pid"]
+        data = {"user_id":"",
+                "professional_id":pid,
                 "complaint_name":request.POST.get("txt_complaint"),
                 "complainttype_id":request.POST.get("sel_complainttype"),
                 "complaint_date":datetime.now(),
                 "cstatus":0,
+                "complaint_reply":"Not replied yet",
                 }
         db.collection("tbl_complaint").add(data)
-        return redirect("webprofessionals:complaints")
+        return redirect("webuser:complaints")
     else:
-        return render(request,"Professionals/Complaints.html",{"comptypedata":comptype_data})
+        return render(request,"User/Complaints.html",{"comptypedata":comptype_data,"complaintdata":comp_data})
 
 
 

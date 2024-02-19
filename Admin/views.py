@@ -283,15 +283,19 @@ def complaints(request):
 
 
     # PROFESSIONALS COMPLAINT
-    professionalcomplaints = db.collection("tbl_complaint").where("professional_id","!=","").where("cstatus","==",0).stream()
+    profcomplaints = db.collection("tbl_complaint").where("professional_id","!=",0).where("cstatus","==",0).stream()
     comp_prof = []
-    for d in professionalcomplaints :
+    for p in profcomplaints :
         data = d.to_dict()
         # INNER JOIN COMPLAINT TYPE
-        ctype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
+
+        pctype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
+
         # INNER JOIN USER NAME
+
         prof = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
-        comp_prof.append({"profcomplaints":data,"id":d.id,"pcomplainttype":ctype,"profname":prof})
+
+        comp_prof.append({"profcomplaints":data,"id":p.id,"ucomplainttype":pctype,"profname":prof})
     
     return render(request,"Admin/Complaints.html",{"ucomplaintdata":comp_user,"pcomplaintdata":comp_prof,})
 

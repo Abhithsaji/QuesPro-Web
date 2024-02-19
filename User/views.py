@@ -43,6 +43,14 @@ def changepassword(request):
     return redirect("webuser:homepage")
 
 def complaints(request):
+
+    compdata = db.collection("tbl_complaint").where("user_id","==",request.session["uid"]).stream()
+    comp_data = []
+    for c in compdata:
+        data = c.to_dict()
+        complainttype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
+        comp_data.append({"complaint":data,"id":c.id,"com":complainttype})
+
     comptype = db.collection("tbl_complainttype").stream()
     comptype_data = []
     for i in comptype:
@@ -55,12 +63,22 @@ def complaints(request):
                 "complaint_name":request.POST.get("txt_complaint"),
                 "complainttype_id":request.POST.get("sel_complainttype"),
                 "complaint_date":datetime.now(),
-                "cstatus":0
+                "cstatus":0,
+                "complaint_reply":"Not replied yet",
                 }
         db.collection("tbl_complaint").add(data)
         return redirect("webuser:complaints")
     else:
-        return render(request,"User/Complaints.html",{"comptypedata":comptype_data})
+        return render(request,"User/Complaints.html",{"comptypedata":comptype_data,"complaintdata":comp_data})
+
+# def viewcomplaints(request):
+#     compdata = db.collection("tbl_complaints").where("user_id","==",request.session["uid"]).stream()
+#     comp_data = []
+#     for c in compdata:
+#         data = c.to_dict()
+#         complainttype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
+#         comp_data.append({"complaint":data,"id":c.id,"com":complainttype})
+#     return render(request,"User/Complaints.html",{"complaintdata":comp_data})
 
 def feedback(request):
     # Fetch existing feedback data for the professional
