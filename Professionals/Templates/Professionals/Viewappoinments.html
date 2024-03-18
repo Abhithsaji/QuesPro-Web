@@ -25,14 +25,14 @@
                 <td><a href="{{i.userdata.photo_url}}"><img src="{{i.userdata.photo_url}}" alt="" width="50px"></a></td>
                 <td>{{i.userdata.user_name}}</td>
                 <td>{{i.userdata.user_email}}</td>
-                <td></td>
-                <td><a href="">Accept</a></td>
-                <td><a href="">Reject</a></td>
+                <td>{{i.appoinment.appoinment_matter}}</td>
+                <td><a href="{% url 'webprofessionals:acceptappoinment' i.id %}">Accept</a></td>
+                <td><a href="{% url 'webprofessionals:rejectappoinment' i.id %}">Reject</a></td>
             </tr> 
             {% endfor %}           
         </table>
 
-        <h1 align="center">Accepted Appoinmenta</h1>
+        <h1 align="center">Accepted Appoinments</h1>
 
         <table align="center" border="1" width="50%">
             <tr align="center">
@@ -41,19 +41,21 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Matter</th>
+                <th>Action</th>
             </tr>
-            {% for i in aappoinmentdata %}
+            {% for j in aappoinmentdata %}
             <tr align="center">
                 <td>{{forloop.counter}}</td>
-                <td><a href="{{i.auserdata.photo_url}}"><img src="{{i.auserdata.photo_url}}" alt="" width="50px"></a></td>
-                <td>{{i.auserdata.user_name}}</td>
-                <td>{{i.auserdata.user_email}}</td>
-                <td></td>
+                <td><a href="{{j.auserdata.photo_url}}"><img src="{{j.auserdata.photo_url}}" alt="" width="50px"></a></td>
+                <td>{{j.auserdata.user_name}}</td>
+                <td>{{j.auserdata.user_email}}</td>
+                <td>{{j.aappoinment.appoinment_matter}}</td>
+                <td><a href="{% url 'webprofessionals:rejectappoinment' j.id %}">Reject</a></td>
             </tr> 
             {% endfor %}           
         </table>
 
-        <h1 align="center">Rejected Appoinment</h1>
+        <h1 align="center">Rejected Appoinments</h1>
 
         <table align="center" border="1" width="50%">
             <tr align="center">
@@ -62,14 +64,16 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Matter</th>
+                <th>Action</th>
             </tr>
-            {% for i in rappoinmentdata %}
+            {% for k in rappoinmentdata %}
             <tr align="center">
                 <td>{{forloop.counter}}</td>
-                <td><a href="{{i.ruserdata.photo_url}}"><img src="{{i.ruserdata.photo_url}}" alt="" width="50px"></a></td>
-                <td>{{i.ruserdata.user_name}}</td>
-                <td>{{i.ruserdata.user_email}}</td>
-                <td></td>
+                <td><a href="{{k.ruserdata.photo_url}}"><img src="{{k.ruserdata.photo_url}}" alt="" width="50px"></a></td>
+                <td>{{k.ruserdata.user_name}}</td>
+                <td>{{k.ruserdata.user_email}}</td>
+                <td>{{k.rappoinment.appoinment_matter}}</td>
+                <td><a href="{% url 'webprofessionals:acceptappoinment' k.id %}">Accept</a></td>
             </tr> 
             {% endfor %}           
         </table>

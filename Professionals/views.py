@@ -64,11 +64,12 @@ def complaints(request):
                 "complaint_date":datetime.now(),
                 "cstatus":0,
                 "complaint_reply":"Not replied yet",
+                "reply_date":"",
                 }
         db.collection("tbl_complaint").add(data)
-        return redirect("webuser:complaints")
+        return redirect("webprofessionals:complaints")
     else:
-        return render(request,"User/Complaints.html",{"comptypedata":comptype_data,"complaintdata":comp_data})
+        return render(request,"Professionals/Complaints.html",{"comptypedata":comptype_data,"complaintdata":comp_data})
 
 
 
@@ -161,6 +162,15 @@ def viewappoinments(request):
         rappoinment_data.append({"rappoinment":rdata,"id":r.id,"ruserdata":ruser})
         
     return render(request,"Professionals/Viewappoinments.html",{"appoinmentdata":appoinment_data,"aappoinmentdata":aappoinment_data,"rappoinmentdata":rappoinment_data})
+ 
+def acceptappoinment(request,id):
+    data = {"astatus":1}
+    db.collection("tbl_appoinment").document(id).update(data)
+    return render(request,"Professionals/Viewappoinment.html")
 
+def rejectappoinment(request,id):
+    data = {"astatus":2}
+    db.collection("tbl_appoinment").document(id).update(data)
+    return render(request,"Professionals/Viewappoinment.html")
 
 

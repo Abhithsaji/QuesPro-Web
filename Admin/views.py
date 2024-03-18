@@ -266,7 +266,7 @@ def rejectedprofessionals(request):
 def complaints(request):
 
 # USER COMPLAINTS
-    usercomplaints = db.collection("tbl_complaint").where("user_id","!=",0).where("cstatus","==",0).stream()
+    usercomplaints = db.collection("tbl_complaint").where("user_id","!=","").where("cstatus","==",0).stream()
     comp_user = []
     for c in usercomplaints :
         data = c.to_dict()
@@ -283,10 +283,10 @@ def complaints(request):
 
 
     # PROFESSIONALS COMPLAINT
-    profcomplaints = db.collection("tbl_complaint").where("professional_id","!=",0).where("cstatus","==",0).stream()
+    profcomplaints = db.collection("tbl_complaint").where("professional_id","!=","").where("cstatus","==",0).stream()
     comp_prof = []
     for p in profcomplaints :
-        data = d.to_dict()
+        data = p.to_dict()
         # INNER JOIN COMPLAINT TYPE
 
         pctype = db.collection("tbl_complainttype").document(data["complainttype_id"]).get().to_dict()
@@ -295,7 +295,7 @@ def complaints(request):
 
         prof = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
 
-        comp_prof.append({"profcomplaints":data,"id":p.id,"ucomplainttype":pctype,"profname":prof})
+        comp_prof.append({"profcomplaints":data,"id":p.id,"pcomplainttype":pctype,"profname":prof})
     
     return render(request,"Admin/Complaints.html",{"ucomplaintdata":comp_user,"pcomplaintdata":comp_prof,})
 

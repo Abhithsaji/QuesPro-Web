@@ -15,6 +15,8 @@ urlpatterns = [
     path('Acceptedrequest/',views.acceptedrequest,name="acceptedrequest"),
     path('Rejectedrequest/',views.rejectedrequest,name="rejectedrequest"),
     path('Viewappoinments/',views.viewappoinments,name="viewappoinments"),
+    path('acceptappoinment/<str:id>',views.acceptappoinment,name="acceptappoinment"),
+    path('rejectappoinment/<str:id>',views.rejectappoinment,name="rejectappoinment"),
 
 
 ]

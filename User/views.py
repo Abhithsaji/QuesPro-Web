@@ -65,6 +65,7 @@ def complaints(request):
                 "complaint_date":datetime.now(),
                 "cstatus":0,
                 "complaint_reply":"Not replied yet",
+                "reply_date":"",
                 }
         db.collection("tbl_complaint").add(data)
         return redirect("webuser:complaints")
@@ -173,7 +174,8 @@ def sendappoinment(request,id):
                 "professional_id":id,
                 "appoinment_date":request.POST.get("txt_date"),
                 "time_from":request.POST.get("txt_timefrom"),
-                "to":request.POST.get("txt_timeto"),
+                "time_to":request.POST.get("txt_timeto"),
+                "appoinment_matter":request.POST.get("txt_matter"),
                 "astatus":0,
                 }
         db.collection("tbl_appoinment").add(data)
