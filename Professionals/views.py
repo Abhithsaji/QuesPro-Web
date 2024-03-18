@@ -7,6 +7,21 @@ from django.conf import settings
 from django.contrib import messages
 from datetime import datetime
 
+Config = {
+  "apiKey": "AIzaSyDCGkJaaLslwxKlIDvscJi4ftbmLQX2Rns",
+  "authDomain": "quespro-8d1d3.firebaseapp.com",
+  "projectId": "quespro-8d1d3",
+  "storageBucket": "quespro-8d1d3.appspot.com",
+  "messagingSenderId": "907286605495",
+  "appId": "1:907286605495:web:7f416537a80b4bfa83e732",
+  "measurementId": "G-RDZGE89JVC",
+  "databaseURL":""
+}
+
+firebase = pyrebase.initialize_app(Config)
+authe = firebase.auth()
+sd = firebase.storage()
+
 
 # Create your views here.
 
@@ -166,11 +181,34 @@ def viewappoinments(request):
 def acceptappoinment(request,id):
     data = {"astatus":1}
     db.collection("tbl_appoinment").document(id).update(data)
-    return render(request,"Professionals/Viewappoinment.html")
+    return redirect("webprofessionals:viewappoinments")
 
 def rejectappoinment(request,id):
     data = {"astatus":2}
     db.collection("tbl_appoinment").document(id).update(data)
-    return render(request,"Professionals/Viewappoinment.html")
+    return redirect("webprofessionals:viewappoinments")
 
+
+def post(request):
+    post = db.collection("tbl_post").where("professional_id","==",request.session["pid"]).stream()
+    post_data = []
+    for i in post:
+        data = i.to_dict()
+        post_data.append({"post":data,"id":i.id})
+
+    if request.method == "POST":
+        post = request.FILES.get("file_post")
+        if post:
+            path = "Posts/" + post.name
+            sd.child(path).put(post)
+            downloadpost_url = sd.child(path).get_url(None)
+
+        data = {"post_url":downloadpost_url,
+                "post_date":datetime.now(),
+                "post_caption":request.POST.get("txt_caption"),
+                "professional_id":request.session["pid"]}
+        db.collection("tbl_post").add(data)
+        return redirect("webprofessionals:post")
+    else:
+        return render(request,"Professionals/Posts.html",{"postdata":post_data})
 

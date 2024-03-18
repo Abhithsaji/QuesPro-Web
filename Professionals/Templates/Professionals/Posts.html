@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+<body>
+    <br><br><br>
+    <h1 align="center">Add Post</h1>
+    <br><form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <th>Select Photo</th>
+                <td><input type="file" name="file_post" id=""></td>
+            </tr>
+            <tr>
+                <td>Add Caption</td>
+                <td><textarea name="txt_caption" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit"></td>
+            </tr>
+        </table>
+        <br><br><br><br><br>
+        <table align="center">
+            {% for i in postdata %}
+            <tr>
+                <td><a href="{{i.post.post_url}}"><img src="{{i.post.post_url}}" alt="" width="50px"></td>
+                <td><a href="">Delete Post</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
