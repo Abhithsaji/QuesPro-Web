@@ -1,0 +1,7 @@
+{% for i in comment %}
+<li class="list-group-item d-flex align-items-center">
+    <img src="{{i.user.photo_url}}" alt="User Photo" class="me-2" style="width: 30px; height: 30px; border-radius: 50%;">
+    <span>{{i.user.user_name}}</span>
+    <span class="ms-auto">{{i.comment.command_content}}</span>
+    </li>
+{%  endfor %}

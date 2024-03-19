@@ -17,5 +17,9 @@ urlpatterns = [
     path('Professionalprofile/<str:id>',views.professionalprofile,name="professionalprofile"),
     path('Viewappoinment/',views.viewappoinment,name="viewappoinment"),
     # path('Viewcomplaints/',views.viewcomplaints,name="viewcomplaints"),
+    path('Post/',views.post,name="post"),
+    path('ajaxlike/',views.ajaxlike,name="ajaxlike"),
+    path('ajaxcomment/',views.ajaxcomment,name="ajaxcomment"),
+    path('ajaxgetcommant/',views.ajaxgetcommant,name="ajaxgetcommant"),
 
 ]

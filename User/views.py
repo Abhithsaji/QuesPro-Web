@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from datetime import datetime
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -192,5 +193,63 @@ def viewappoinment(request):
         appoinment_data.append({"appoinment":data,"id":a.id,"professional":prof})
     return render(request,"User/Viewappoinment.html",{"appoinmentdata":appoinment_data})
 
+def post(request):
+    post = db.collection("tbl_post").stream()
+    post_data = []
+    for i in post:
+        likescount = db.collection("tbl_like").where("post_id", "==", i.id).get()
+        data_list_count = len(likescount)
+        # print(data_list_count)
+        ps = i.to_dict()
+        pro = db.collection("tbl_professional").document(ps["professional_id"]).get().to_dict()
+        likes = db.collection("tbl_like").where("post_id", "==", i.id).where("user_id", "==", request.session["uid"]).get()
+        data_list = len(likes)
+        cc = 0
+        # print(data_list)
+        if data_list > 0:
+            cc = cc + 1
+            post_data.append({"post":i.to_dict(),"id":i.id,"pro":pro,"condition":1,"count":data_list_count})
+        else:
+            post_data.append({"post":i.to_dict(),"id":i.id,"pro":pro,"condition":0,"count":data_list_count})
+    # print(post_data)
+    
+    return render(request,"User/Post.html",{"post":post_data})
 
+def ajaxlike(request):
+    count = db.collection("tbl_like").where("user_id", "==", request.session["uid"]).where("post_id", "==", request.GET.get("postid")).stream()
+    ct = 0
+    for c in count:
+        ct = ct + 1
+        id = c.id
+    # print(ct)
+    if ct > 0:
+        db.collection("tbl_like").document(id).delete()
+        likescount = db.collection("tbl_like").where("post_id", "==", request.GET.get("postid")).get()
+        data_list_count = len(likescount)
+        # print(data_list_count)
+        return JsonResponse({"color":1,"count":data_list_count})
+    else:
+        db.collection("tbl_like").add({"user_id":request.session["uid"],"post_id":request.GET.get("postid")})
+        likescount = db.collection("tbl_like").where("post_id", "==", request.GET.get("postid")).get()
+        data_list_count = len(likescount)
+        # print(data_list_count)
+        return JsonResponse({"color":0,"count":data_list_count})
 
+def ajaxcomment(request):
+    db.collection("tbl_comment").add({"post_id":request.GET.get("postid"),"user_id":request.session["uid"],"command_content":request.GET.get("content")})
+    comment = db.collection("tbl_comment").where("post_id", "==", request.GET.get("postid")).stream()
+    com_data = []
+    for c in comment:
+        cm = c.to_dict()
+        user = db.collection("tbl_user").document(cm["user_id"]).get().to_dict()
+        com_data.append({"comment":c.to_dict(),"id":c.id,"user":user})
+    return render(request,"User/AjaxComment.html",{"comment":com_data})
+
+def ajaxgetcommant(request):
+    comment = db.collection("tbl_comment").where("post_id", "==",request.GET.get("postid")).stream()
+    com_data = []
+    for c in comment:
+        cm = c.to_dict()
+        user = db.collection("tbl_user").document(cm["user_id"]).get().to_dict()
+        com_data.append({"comment":c.to_dict(),"id":c.id,"user":user})
+    return render(request,"User/AjaxComment.html",{"comment":com_data})
