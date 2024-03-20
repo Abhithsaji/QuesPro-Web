@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <table align="center" width="100%" height="50px" border="1">
+
+        <tr align="center">
+            <td><a href="{% url 'webadmin:district' %}"> District</a></td>
+            <td><a href="{% url 'webadmin:place' %}">Place</a></td>
+            <td><a href="{% url 'webadmin:profession' %}">Add Proffession</a></td>
+            <td><a href="{% url 'webadmin:comptype' %}">Add complaint Type</a></td>
+            <td><a href="{% url 'webadmin:newuser' %}">New Users</a></td>
+            <td><a href="{% url 'webadmin:newprofessionals' %}">New Professionals</a></td>
+            <td><a href="{% url 'webadmin:aprovedprofessionals' %}">Approved Professionals</a></td>
+            <td><a href="{% url 'webadmin:rejectedprofessionals' %}">Rejected Professionals</a></td>
+            <td><a href="{% url 'webadmin:complaints' %}">Complaints</a></td>
+            <td><a href="{% url 'webadmin:repliedcomplaint' %}">Replied Complaints</a></td>
+            <td><a href="{% url 'webadmin:feedback' %}">Feedbacks</a></td>
+
+            <td>Logout</td>
+        </tr>
+    </table>
+</body>
+</html>

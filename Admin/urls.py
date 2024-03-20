@@ -40,5 +40,6 @@ urlpatterns = [
     path('eplycomplaints/<str:id>',views.replycomplaints,name="replycomplaints"),
     
     path('Feedback/',views.feedback,name="feedback"),
+    path('delpost/<str:id>',views.delpost,name="delpost"),
 
 ]

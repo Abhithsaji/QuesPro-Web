@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>District</title>
 </head>
-<body>
-    <form action="" method="post">
+<body align="center">
+    <form action="" method="post" align="center">
         {% csrf_token %}
-        <table>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table align="center" class="table table-bordered mb-0">
             <tr>
                 <td>Enter District</td>
                 <td><input type="text" name="txt_district" id="" value="{{district.district_name}}"></td>
@@ -16,18 +22,23 @@
             <tr>
                 <td colspan="2"><input type="submit" value="Save"></td>
             </tr>
-
+        </table>
+        </div></div></div>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
-                <td>Sl.No</td>
-                <td>District</td>
-                <td>Action</td>
+                <th>Sl.No</h>
+                <th>District</th>
+                <th>Action</th>
             </tr>
             {% for i in dis %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{i.District.district_name}}</td>
                 <td>
-                    <a href="{% url 'webadmin:deldistrict' i.id %}">Delete</a>
+                    <a href="{% url 'webadmin:deldistrict' i.id %}">Delete </a>|
                     <a href="{% url 'webadmin:updatedistrict' i.id %}">Edit</a>
                 </td>
             </tr>
@@ -36,3 +47,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}

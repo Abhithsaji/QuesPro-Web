@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place</title>
 </head>
-<body>
+<body >
     <form action="" method="post">
         {% csrf_token %}
-        <table>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
                 <td>Select District</td>
                 <td>
@@ -30,14 +36,19 @@
                 <td><input type="text" name="txt_place" value="{{placedata.place_name}}"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Save"></td>
+                <td colspan="2" align="center"><input type="submit" value="Save"></td>
             </tr>
-
+        </table>
+        </div></div></div>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
-                <td>Sl.No</td>
-                <td>District</td>
-                <td>Place</td>
-                <td>Action</td>
+                <th>Sl.No</th>
+                <th>District</th>
+                <th>Place</th>
+                <th>Action</th>
             </tr>
             {% for i in place %}
             <tr>
@@ -45,7 +56,7 @@
                 <td>{{i.district.district_name}}</td>
                 <td>{{i.place.place_name}}</td>
                 <td>
-                    <a href="{% url 'webadmin:delplace' i.id %}">Delete</a>
+                    <a href="{% url 'webadmin:delplace' i.id %}">Delete </a>|
                     <a href="{% url 'webadmin:updateplace' i.id %}">Edit</a>
                 </td>
             </tr>
@@ -54,3 +65,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}

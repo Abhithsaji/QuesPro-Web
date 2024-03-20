@@ -3,105 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Professional Registration</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <br><br><br><br>
-    <h1 align="center"><b>PROFESSIONAL REGISTRATION</b></h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table align="center" border="1">
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="email" name="txt_email" id=""></td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td><input type="text" name="txt_contact" id=""></td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td><textarea name="txt_address" id="" cols="30" rows="10"></textarea></td>
-            </tr>
-            <tr>
-                <td>Photo</td>
-                <td><input type="file" name="file_photo" id=""></td>
-            </tr>
-            <tr>
-                <td>Aadhar</td>
-                <td><input type="file" name="file_aadhar" id=""></td>
-            </tr>
-            <tr>
-                <td>Aadhar Number</td>
-                <td><input type="text" name="txt_aadharno" id=""></td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td>Male<input type="radio" name="rad_gender" value="Male" id="">
-                    Female<input type="radio" name="rad_gender" value="Female" id="">
-                    Other<input type="radio" name="rad_gender" value="Other" id="">
-                </td>
-            </tr>
-            <tr>
-                <td>DOB</td>
-                <td><input type="date" name="date_dob" id=""></td>
-            </tr>
-            
-            <tr>
-                <td>About</td>
-                <td><textarea name="txt_about" id="" cols="30" rows="10"></textarea></td>
-            </tr>
-            <tr>
-                <td>Select profession</td>
-                <td><select name="sel_profession" id="">
+    <div class="container">
+        <h1 class="title">Professional Registration</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="txt_name">Name</label>
+                <input type="text" name="txt_name" id="txt_name">
+            </div>
+            <div class="form-group">
+                <label for="txt_email">Email</label>
+                <input type="text" name="txt_email" id="txt_email">
+            </div>
+            <div class="form-group">
+                <label for="txt_contact">Contact</label>
+                <input type="text" name="txt_contact" id="txt_contact">
+            </div>
+            <div class="form-group">
+                <label for="txt_address">Address</label>
+                <textarea name="txt_address" id="txt_address" cols="30" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="file_photo">Photo</label>
+                <input type="file" name="file_photo" id="file_photo">
+            </div>
+            <div class="form-group">
+                <label for="file_photo">Aadhar</label>
+                <input type="file" name="file_aadhar" id="file_aadhar">
+            </div>
+            <div class="form-group">
+                <label for="txt_aadharno">Aadhar No</label>
+                <input type="text" name="txt_aadharno" id="txt_aadharno">
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <input type="radio" name="rad_gender" value="Male" id="male"><label for="male">Male</label>
+                <input type="radio" name="rad_gender" value="Female" id="female"><label for="female">Female</label>
+                <input type="radio" name="rad_gender" value="Other" id="other"><label for="other">Other</label>
+            </div>
+            <div class="form-group">
+                <label for="date_dob">Date of Birth</label>
+                <input type="date" name="date_dob" id="date_dob">
+            </div>
+            <div class="form-group">
+                <label for="sel_district">Profession</label>
+                <select name="sel_profession" id="">
                     <option value="">---Select---</option>
                     {% for p in profession_data %}
                     <option value="{{p.id}}">{{p.profession.profession_name}}</option>
                     {% endfor %}
-                </select></td>
-            </tr>
-            <tr>
-                <td>Specification</td>
-                <td><input type="text" name="txt_specification" id=""></td>
-            </tr>
-            <tr>
-                <td>Select District</td>
-                <td><select name="sel_district" id="sel_district">
-                        <option value="">---Select---</option>
-                        {% for i in districtdata %}
-                        <option value="{{i.id}}">{{i.district.district_name}}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Select Place</td>
-                <td><select name="sel_place" id="sel_place">
-                        <option value="">---Select---</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Enter Password</td>
-                <td><input type="password" name="txt_password" id=""></td>
-            </tr>
-
-            <tr>
-                <td colspan="2" align="center" align="center"><input type="submit" value="Register"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><a href="{% url 'webguest:index' %}" align="align-items-center">Back to HomePage?</a>                </td>
-            </tr>
-        </table>
-    </form>
-    <br><br><br><br><br>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="txt_name">Specification</label>
+                <input type="text" name="txt_specification" id="">
+            </div>
+            <div class="form-group">
+                <label for="sel_district">District</label>
+                <select name="sel_district" id="sel_district">
+                    <option value="">---Select---</option>
+                    {% for i in districtdata %}
+                    <option value="{{i.id}}">{{i.district.district_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sel_place">Place</label>
+                <select name="sel_place" id="sel_place">
+                    <option value="">---Select---</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="txt_password">Password</label>
+                <input type="password" name="txt_password" id="txt_password">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register">
+            </div>
+            <div class="back">
+                <a href="{% url 'webguest:index' %}" class="back1">Back to HomePage?</a>
+            </div>
+        </form>
+    </div>
+    
 </body>
 </html>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $("#sel_district").change(function () {
@@ -115,80 +105,92 @@
             },
         });
     });
-
 </script>
 <style>
     body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f7fc; /* Light blue background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f7ff; /* Light blue background */
 }
 
 .container {
-    width: 60%;
+    width: 40%;
     margin: 50px auto;
+    background-color: #ffffff;
     padding: 30px;
-    background-color: #ffffff; /* White container background */
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-h1 {
+.title {
     text-align: center;
-    color: #007bff; /* Blue title color */
+    color: #5dabff; /* Blue title */
 }
 
-form {
-    margin-top: 20px;
-}
-
-table {
-    margin: 0 auto;
-}
-
-td {
-    padding: 10px;
+.form-group {
+    margin-bottom: 20px;
 }
 
 input[type="text"],
-input[type="email"],
 input[type="password"],
 textarea,
 select {
-    width: 100%;
+    width: calc(100% - 20px); /* Adjusted width */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+    color: #999; /* Placeholder color */
 }
 
 input[type="file"] {
-    width: 100%;
+    width: calc(100% - 20px); /* Adjusted width */
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #dfdfdf;
     border-radius: 5px;
     box-sizing: border-box;
+    outline: none;
 }
 
 input[type="radio"] {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 input[type="submit"] {
-    width: 100%;
+    width: calc(100% - 20px); /* Adjusted width */
     padding: 10px;
-    background-color: #007bff; /* Blue submit button */
+    background-color: rgb(117, 184, 255); /* Blue submit button */
     border: none;
     border-radius: 5px;
-    color: #fff;
+    color: #ffffff;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #49a1ff; /* Darker blue on hover */
+}
+.back{
+    text-decoration: none;
+    text-align: right;
+    color: black;
+}
+.back1{
+    text-decoration: none;
+    color: black;
+    padding-right: 17px;
 }
 
+
 </style>
+
+
+

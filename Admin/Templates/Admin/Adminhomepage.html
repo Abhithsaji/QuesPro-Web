@@ -1,30 +1,108 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'Admin/assets/img/favicon.ico' %}">
     <title>Admin</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'Admin/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Admin/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Admin/assets/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
 </head>
+
 <body>
-    <table align="center" width="100%" height="50px" border="1">
+    <div class="main-wrapper">
+        <div class="header">
+			<div class="header-left">
+				<a href="index-2.html" class="logo">
+					<img src="{% static 'Admin/assets/img/logo.png' %}" width="35" height="35" alt=""> <span>QuesPro</span>
+				</a>
+			</div>
+			
+        </div>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fa-solid fa-square-plus"></i> <span>Post</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:district' %}"><i class="fa-solid fa-globe"></i> <span>District</span></a>
+                        </li>
+						<li>
+                            <a href="{% url 'webadmin:place' %}"><i class="fa-solid fa-location-dot"></i> <span>Place</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:profession' %}"><i class="fa-solid fa-table-list"></i></i> <span>Profession</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:comptype' %}"><i class="fa-solid fa-comment"></i> <span>Complaint Type</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:newuser' %}"><i class="fa-solid fa-user"></i> <span>New Users</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:newprofessionals' %}"><i class="fa-solid fa-user-tie"></i> <span>New Professionals</span></a>
+                        </li>
+						<li>
+                            <a href="{% url 'webadmin:aprovedprofessionals' %}"><i class="fa-solid fa-person-circle-check"></i> <span>Approved Professionals</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:rejectedprofessionals' %}"><i class="fa-solid fa-square-xmark"></i> <span>Rejected Professionals</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:complaints' %}"><i class="fa-regular fa-message"></i> <span>Complaints</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:repliedcomplaint' %}"><i class="fa-solid fa-reply-all"></i> <span>Replied Complaints</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'webadmin:feedback' %}"><i class="fa-regular fa-comments"></i> <span>Feedbacks</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+        <div>
+            <div>
+                <span>Posts</span>
+            </div>
+            {% for i in postdata %}
+            <div>
+                <img src="{{i.professional.professional_photo}}" alt="" width="20px" height="20px">  {{i.professional.professional_name}}
+            </div>
+            <div>
+                {{i.post.post_date}}
+            </div>
+            <div>
+                <img src="{{i.post.post_url}}" alt="" width="100px" height="100px">
+            </div>
+            <div>
+                {{i.post.post_caption}}
+            </div>
+            <div>
+                <a href="{% url 'webadmin:delpost' i.id %}">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
 
-        <tr align="center">
-            <td><a href="{% url 'webadmin:district' %}"> District</a></td>
-            <td><a href="{% url 'webadmin:place' %}">Place</a></td>
-            <td><a href="{% url 'webadmin:profession' %}">Add Proffession</a></td>
-            <td><a href="{% url 'webadmin:comptype' %}">Add complaint Type</a></td>
-            <td><a href="{% url 'webadmin:newuser' %}">New Users</a></td>
-            <!-- <td><a href="">Accepted Users</a></td>
-            <td><a href="">Rejected User</a></td> -->
-            <td><a href="{% url 'webadmin:newprofessionals' %}">New Professionals</a></td>
-            <td><a href="{% url 'webadmin:aprovedprofessionals' %}">Approved Professionals</a></td>
-            <td><a href="{% url 'webadmin:rejectedprofessionals' %}">Rejected Professionals</a></td>
-            <td><a href="{% url 'webadmin:complaints' %}">Complaints</a></td>
-            <td><a href="{% url 'webadmin:repliedcomplaint' %}">Replied Complaints</a></td>
-            <td><a href="{% url 'webadmin:feedback' %}">Feedbacks</a></td>
+    <div class="sidebar-overlay" data-reff=""></div>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/Chart.bundle.js"></script>
+    <script src="assets/js/chart.js"></script>
+    <script src="assets/js/app.js"></script>
 
-            <td>Logout</td>
-        </tr>
-    </table>
 </body>
 </html>

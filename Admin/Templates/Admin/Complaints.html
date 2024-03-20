@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +9,13 @@
     <title>User Complaints</title>
 </head>
 <body>
-    <br><br><br><br><br>
-    <h1 align="center"><b> USER COMPLAINTS</b></h1>
+    <h1><b> USER COMPLAINTS</b></h1>
     <form action="" method="post">
         {% csrf_token %}
-        <table align="center" border="1">
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr align="center">
                 <th>Sl.No</th>
                 <th>Name</th>
@@ -30,10 +35,13 @@
             </tr>
             {% endfor %}
         </table>
+        </div></div></div>
 
-        <h1 align="center"><b> PROFESSIONAL COMPLAINTS</b></h1>
-
-        <table align="center" border="1">
+        <h1><b> PROFESSIONAL COMPLAINTS</b></h1>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr align="center">
                 <th>Sl.No</th>
                 <th>Name</th>
@@ -53,6 +61,8 @@
             </tr>
             {% endfor %}
         </table>
+        </div></div></div>
     </form>
 </body>
 </html>
+{% endblock content %}

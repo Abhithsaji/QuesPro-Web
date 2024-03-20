@@ -170,7 +170,13 @@ def updatecomptype(request,id):
         return render(request,"Admin/Complainttype.html",{"comptype_data":comptype})
 
 def adminhomepage(request):
-    return render(request,"Admin/Adminhomepage.html")
+    post = db.collection("tbl_post").stream()
+    post_data = []
+    for i in post:
+        data = i.to_dict()
+        prof = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
+        post_data.append({"post":data,"id":i.id,"professional":prof})
+    return render(request,"Admin/Adminhomepage.html",{"postdata":post_data})
 
 # VIEW New User
 
@@ -364,4 +370,7 @@ def feedback(request):
 
     return render(request,"Admin/Professionalfeedback.html",{"prof_feedback":feedback_prof,"userfeedback":feedback_user})
 
+def delpost(request,id):
+    post = db.collection("tbl_post").document(id).delete()
+    return redirect("webadmin:adminhomepage")
 

@@ -1,3 +1,7 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,10 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <table>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
                 <td>Enter Complaint Type</td>
                 <td><input type="text" name="txt_comptype" id="" value="{{comptype_data.complainttype_name}}"></td>
@@ -16,18 +23,23 @@
             <tr>
                 <td colspan="2"><input type="submit" value="Save"></td>
             </tr>
-
+        </table>
+        </div></div></div>
+        <div class="col-lg-6">
+            <div class="card-box">
+                <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
-                <td>Sl.No</td>
-                <td>Complaint Type</td>
-                <td>Action</td>
+                <th>Sl.No</th>
+                <th>Complaint Type</th>
+                <th>Action</th>
             </tr>
             {% for i in comptype %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td>{{i.comptype.complainttype_name}}</td>
                 <td>
-                    <a href="{% url 'webadmin:delcomptype' i.id %}">Delete</a>
+                    <a href="{% url 'webadmin:delcomptype' i.id %}">Delete </a>|
                     <a href="{% url 'webadmin:updatecomptype' i.id %}">Edit</a>
                 </td>
             </tr>
@@ -36,3 +48,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}
