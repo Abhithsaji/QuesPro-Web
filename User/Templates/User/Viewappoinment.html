@@ -28,7 +28,13 @@
                 <td>Your request is pending.</td>
 
                 {% elif i.appoinment.astatus == 1 %}
-                <td>Appoinment accepted. <a href="">Pay now</a></td>
+                <td>Appoinment accepted. <a href="{% url 'webuser:payment' i.id %}">Pay now</a></td>
+
+                {% elif i.appoinment.astatus == 3 %}
+                <td>Payed | <a href="{% url 'webuser:chat' i.id %}">Chat</a></td>
+
+                {% elif i.appoinment.astatus == 4 %}
+                <td><a href="{% url 'webuser:chat' i.id %}">Chat</a></td>
 
                 {% else %}
                 <td>Your request was rejected.</td>

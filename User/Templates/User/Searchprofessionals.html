@@ -136,7 +136,13 @@
                     <div><b>Pro</b> :{{i.pro.profession_name}}</div>
                     <div> <b>Spe</b> :{{ i.professional.professional_specification }}</div>
                     <div><b>About</b> :{{ i.professional.professional_about }}</div>
-                    <div><a href="{% url 'webuser:sendrequest' i.id %}">Send Request</a></div>
+                    <div>
+                        {% if i.condition == 0 %}
+                        <a href="{% url 'webuser:sendrequest' i.id %}">Send Request</a>
+                        {% else %}
+                        Request Already Send
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -1,0 +1,49 @@
+{% for i in data %}
+{% if i.user_from == tid %}
+    {% if i.chat_file != '' %}
+        <div class="par-r-mess">
+            <div class="r-mess">
+                <div class="con-width">
+                    <a href="{{i.chat_file}}"><img src="{{i.chat_file}}" width="250px" height="250px" style="border-radius: 5%;" alt=""></a>
+                </div>
+                <div class="r-time">
+                    {{i.chat_time|time}}
+                </div>
+            </div>
+        </div>
+    {% else %} 
+        <div class="par-r-mess">
+            <div class="r-mess">
+                <div class="con-width">
+                    {{i.chat_content}}
+                </div>
+                <div class="r-time">
+                    {{i.chat_time|time}}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    {% if i.chat_file != '' %}
+    <div class="par-s-mess">
+        <div class="s-mess">
+            <div class="con-width">
+                <a href="{{i.chat_file}}" target="__blank"><img src="{{i.chat_file}}" width="250px" height="250px" style="border-radius: 5%;" alt=""></a>
+            </div>
+            <div class="s-time">{{i.chat_time|time}}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="par-s-mess">
+        <div class="s-mess">
+            <div class="con-width">
+                {{i.chat_content}}
+            </div>
+            <div class="s-time">
+                {{i.chat_time|time}}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+{% endfor %}

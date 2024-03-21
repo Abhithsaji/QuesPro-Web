@@ -13,6 +13,21 @@ from django.http import JsonResponse
 
 db = firestore.client()
 
+Config = {
+  "apiKey": "AIzaSyDCGkJaaLslwxKlIDvscJi4ftbmLQX2Rns",
+  "authDomain": "quespro-8d1d3.firebaseapp.com",
+  "projectId": "quespro-8d1d3",
+  "storageBucket": "quespro-8d1d3.appspot.com",
+  "messagingSenderId": "907286605495",
+  "appId": "1:907286605495:web:7f416537a80b4bfa83e732",
+  "measurementId": "G-RDZGE89JVC",
+  "databaseURL":""
+}
+
+firebase = pyrebase.initialize_app(Config)
+authe = firebase.auth()
+sd = firebase.storage()
+
 
 def homepage(request):
     return render(request,"User/Userhomepage.html")
@@ -118,8 +133,18 @@ def searchprofessionals(request):
     for i in professionals:
         data = i.to_dict()
         pro = db.collection("tbl_profession").document(data["profession_id"]).get().to_dict()
-        prof_data.append({"professional":data,"id":i.id,"pro":pro})
+        prof_data.append({
+            "professional":data,
+            "id":i.id,
+            "pro":pro,
+            "condition":requestcheck(i.id,request.session["uid"]),
+            })
     return render(request,"User/Searchprofessionals.html",{"professiondata":profession_data,"pro":prof_data})
+
+def requestcheck(pid,uid):
+    procount = db.collection("tbl_request").where("professional_id", "==", pid).where("user_id", "==", uid).get()
+    # print(len(procount))
+    return len(procount)
 
 def ajaxprofession(request):
     professionals = db.collection("tbl_professional").where("profession_id", "==" ,request.GET.get("prof")).stream()
@@ -157,7 +182,7 @@ def following(request):
     for k in rejected:
         data = k.to_dict()
         rpro = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
-        rprofession = db.collection("tbl_profession").document(pro["profession_id"]).get().to_dict()
+        rprofession = db.collection("tbl_profession").document(rpro["profession_id"]).get().to_dict()
         rejected_data.append({"rejected":data,"id":k.id,"rprofessional":rpro,"rprofession":rprofession})
 
     return render(request,"User/Following.html",{"following":request_data,"accepted":accepted_data,"rejected":rejected_data})
@@ -253,3 +278,59 @@ def ajaxgetcommant(request):
         user = db.collection("tbl_user").document(cm["user_id"]).get().to_dict()
         com_data.append({"comment":c.to_dict(),"id":c.id,"user":user})
     return render(request,"User/AjaxComment.html",{"comment":com_data})
+
+
+def payment(request,id):
+    app = db.collection("tbl_appoinment").document(id).get().to_dict()
+    pro = db.collection("tbl_professional").document(app["professional_id"]).get().to_dict()
+    fee = pro["professional_fees"]
+    if request.method == "POST":
+        app = db.collection("tbl_appoinment").document(id).update({"astatus":3})
+        return redirect("webuser:loader")
+    else:
+        return render(request,"User/Payment.html",{"total":fee})
+
+def loader(request):
+    return render(request,"User/Loader.html")
+
+def paymentsuc(request):
+    return render(request,"User/Payment_suc.html")
+
+
+def chat(request,id):
+    app = db.collection("tbl_appoinment").document(id).get().to_dict()
+    to_user = db.collection("tbl_professional").document(app["professional_id"]).get().to_dict()
+    return render(request,"User/Chat.html",{"user":to_user,"tid":app["professional_id"],"status":app["astatus"]})
+
+def ajaxchat(request):
+    image = request.FILES.get("file")
+    tid = request.POST.get("tid")
+    if image:
+        path = "ChatFiles/" + image.name
+        sd.child(path).put(image)
+        d_url = sd.child(path).get_url(None)
+        db.collection("tbl_chat").add({"chat_content":"","chat_time":datetime.now(),"user_from":request.session["uid"],"professional_to":request.POST.get("tid"),"chat_file":d_url,"user_to":"","professional_from":""})
+        return render(request,"User/Chat.html",{"tid":tid})
+    else:
+        db.collection("tbl_chat").add({"chat_content":request.POST.get("msg"),"chat_time":datetime.now(),"user_from":request.session["uid"],"professional_to":request.POST.get("tid"),"chat_file":"","user_to":"","professional_from":""})
+        return render(request,"User/Chat.html",{"tid":tid})
+
+def ajaxchatview(request):
+    tid = request.GET.get("tid")
+    chat = db.collection("tbl_chat").order_by("chat_time").stream()
+    data = []
+    for c in chat:
+        cdata = c.to_dict()
+        if ((cdata["user_from"] == request.session["uid"]) | (cdata["user_to"] == request.session["uid"])) & ((cdata["professional_from"] == tid) | (cdata["professional_to"] == tid)):
+            data.append(cdata)
+    return render(request,"User/ChatView.html",{"data":data,"tid":tid})
+
+def clearchat(request):
+    toid = request.GET.get("tid")
+    chat_data1 = db.collection("tbl_chat").where("user_from", "==", request.session["uid"]).where("professional_to", "==", request.GET.get("tid")).stream()
+    for i1 in chat_data1:
+        i1.reference.delete()
+    chat_data2 = db.collection("tbl_chat").where("user_to", "==", request.session["uid"]).where("professional_from", "==", request.GET.get("tid")).stream()
+    for i2 in chat_data2:
+        i2.reference.delete()
+    return render(request,"User/ClearChat.html",{"msg":"Chat Cleared Sucessfully....."})

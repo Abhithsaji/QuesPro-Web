@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
     <br><br><br><br><br>
@@ -12,7 +13,7 @@
         <table align="center" border="1">
             <tr>
                 <td>Date</td>
-                <td><input type="date" name="txt_date" id=""></td>
+                <td><input type="date" name="txt_date"  id="inputdate"></td>
             </tr>
             <tr>
                 <td> Time From</td>
@@ -33,3 +34,18 @@
     </form>
 </body>
 </html>
+<script type="text/javascript">
+    $(function(){
+        var dtToday = new Date();
+     
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+         day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        $('#inputdate').attr('min', maxDate);
+    });
+    </script>

@@ -39,7 +39,7 @@ def editprofile(request):
     prof = db.collection("tbl_professional").document(request.session["pid"]).get().to_dict()
     if request.method == "POST":
         data = {"professional_name":request.POST.get("txt_name"),"professional_contact":request.POST.get("txt_contact"),
-                "professional_address":request.POST.get("txt_address"),"professional_about":request.POST.get("txt_about")}
+                "professional_address":request.POST.get("txt_address"),"professional_about":request.POST.get("txt_about"),"professional_fees":request.POST.get("txt_fees")}
         db.collection("tbl_professional").document(request.session["pid"]).update(data)
         return redirect("webprofessionals:profile")
     else:
@@ -162,7 +162,7 @@ def viewappoinments(request):
         user = db.collection("tbl_user").document(data["user_id"]).get().to_dict()
         appoinment_data.append({"appoinment":data,"id":i.id,"userdata":user})
 
-    aappoinment = db.collection("tbl_appoinment").where("professional_id","==",request.session["pid"]).where("astatus","==",1).stream()
+    aappoinment = db.collection("tbl_appoinment").where("professional_id","==",request.session["pid"]).where("astatus","!=",0).where("astatus",">=", 3).stream()
     aappoinment_data = []
     for a in aappoinment:
         adata = a.to_dict()
@@ -212,3 +212,45 @@ def post(request):
     else:
         return render(request,"Professionals/Posts.html",{"postdata":post_data})
 
+def chat(request,id):
+    app = db.collection("tbl_appoinment").document(id).get().to_dict()
+    to_user = db.collection("tbl_user").document(app["user_id"]).get().to_dict()
+    return render(request,"Professionals/Chat.html",{"user":to_user,"tid":app["user_id"]})
+
+def ajaxchat(request):
+    image = request.FILES.get("file")
+    tid = request.POST.get("tid")
+    if image:
+        path = "ChatFiles/" + image.name
+        sd.child(path).put(image)
+        d_url = sd.child(path).get_url(None)
+        db.collection("tbl_chat").add({"chat_content":"","chat_time":datetime.now(),"professional_from":request.session["pid"],"user_to":request.POST.get("tid"),"chat_file":d_url,"professional_to":"","user_from":""})
+        return render(request,"Professionals/Chat.html",{"tid":tid})
+    else:
+        db.collection("tbl_chat").add({"chat_content":request.POST.get("msg"),"chat_time":datetime.now(),"professional_from":request.session["pid"],"user_to":request.POST.get("tid"),"chat_file":"","professional_to":"","user_from":""})
+        return render(request,"Professionals/Chat.html",{"tid":tid})
+
+def ajaxchatview(request):
+    tid = request.GET.get("tid")
+    user_ref = db.collection("tbl_chat")
+    chat = db.collection("tbl_chat").order_by("chat_time").stream()
+    data = []
+    for c in chat:
+        cdata = c.to_dict()
+        if ((cdata["professional_from"] == request.session["pid"]) | (cdata["professional_to"] == request.session["pid"])) & ((cdata["user_from"] == tid) | (cdata["user_to"] == tid)):
+            data.append(cdata)
+    return render(request,"Professionals/ChatView.html",{"data":data,"tid":tid})
+
+def clearchat(request):
+    toid = request.GET.get("tid")
+    chat_data1 = db.collection("tbl_chat").where("professional_from", "==", request.session["pid"]).where("user_to", "==", request.GET.get("tid")).stream()
+    for i1 in chat_data1:
+        i1.reference.delete()
+    chat_data2 = db.collection("tbl_chat").where("professional_to", "==", request.session["pid"]).where("user_from", "==", request.GET.get("tid")).stream()
+    for i2 in chat_data2:
+        i2.reference.delete()
+    return render(request,"Professionals/ClearChat.html",{"msg":"Chat Cleared Sucessfully....."})
+
+def endsession(request,id):
+    db.collection("tbl_appoinment").document(id).update({"astatus":4})
+    return redirect("webprofessionals:viewappoinments")

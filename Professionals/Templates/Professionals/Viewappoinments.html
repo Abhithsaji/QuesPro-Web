@@ -50,7 +50,15 @@
                 <td>{{j.auserdata.user_name}}</td>
                 <td>{{j.auserdata.user_email}}</td>
                 <td>{{j.aappoinment.appoinment_matter}}</td>
-                <td><a href="{% url 'webprofessionals:rejectappoinment' j.id %}">Reject</a></td>
+                <td>
+                    {% if j.aappoinment.astatus == 3 %}
+                    Payed | <a href="{% url 'webprofessionals:chat' j.id %}">Chat</a> | <a href="{% url 'webprofessionals:endsession' j.id %}">End Session</a>
+                    {% elif j.aappoinment.astatus == 4 %}
+                    Session Ended
+                    {% else %}
+                    Not payed | <a href="{% url 'webprofessionals:rejectappoinment' j.id %}">Reject</a>
+                    {% endif %}
+                </td>
             </tr> 
             {% endfor %}           
         </table>

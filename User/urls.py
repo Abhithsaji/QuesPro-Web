@@ -22,4 +22,14 @@ urlpatterns = [
     path('ajaxcomment/',views.ajaxcomment,name="ajaxcomment"),
     path('ajaxgetcommant/',views.ajaxgetcommant,name="ajaxgetcommant"),
 
+    path('payment/<str:id>',views.payment,name="payment"),
+    path('paymentsuc/',views.paymentsuc,name="paymentsuc"),
+    path('loader/',views.loader,name="loader"),
+
+    path('chat/<str:id>',views.chat,name="chat"),
+    path('ajaxchat/',views.ajaxchat,name="ajaxchat"),
+    path('ajaxchatview/',views.ajaxchatview,name="ajaxchatview"),
+    path('clearchat/',views.clearchat,name="clearchat"),
+
+
 ]

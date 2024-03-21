@@ -13,45 +13,44 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="txt_name">Name</label>
-                <input type="text" name="txt_name" id="txt_name">
+                <input type="text" name="txt_name" id="txt_name" required>
             </div>
             <div class="form-group">
                 <label for="txt_email">Email</label>
-                <input type="text" name="txt_email" id="txt_email">
+                <input type="text" name="txt_email" id="txt_email" required>
             </div>
             <div class="form-group">
                 <label for="txt_contact">Contact</label>
-                <input type="text" name="txt_contact" id="txt_contact">
+                <input type="text" name="txt_contact" id="txt_contact" required>
             </div>
             <div class="form-group">
                 <label for="txt_address">Address</label>
-                <textarea name="txt_address" id="txt_address" cols="30" rows="5"></textarea>
+                <textarea name="txt_address" id="txt_address" cols="30" rows="5" required></textarea>
             </div>
             <div class="form-group">
                 <label for="file_photo">Photo</label>
-                <input type="file" name="file_photo" id="file_photo">
+                <input type="file" name="file_photo" id="file_photo" required>
             </div>
             <div class="form-group">
                 <label for="file_photo">Aadhar</label>
-                <input type="file" name="file_aadhar" id="file_aadhar">
+                <input type="file" name="file_aadhar" id="file_aadhar" required>
             </div>
             <div class="form-group">
                 <label for="txt_aadharno">Aadhar No</label>
-                <input type="text" name="txt_aadharno" id="txt_aadharno">
+                <input type="text" name="txt_aadharno" id="txt_aadharno" required>
             </div>
             <div class="form-group">
-                <label>Gender</label>
-                <input type="radio" name="rad_gender" value="Male" id="male"><label for="male">Male</label>
-                <input type="radio" name="rad_gender" value="Female" id="female"><label for="female">Female</label>
-                <input type="radio" name="rad_gender" value="Other" id="other"><label for="other">Other</label>
+                <input type="radio" name="rad_gender" value="Male" id="male"><label for="male" required>Male</label>
+                <input type="radio" name="rad_gender" value="Female" id="female"><label for="female" required>Female</label>
+                <input type="radio" name="rad_gender" value="Other" id="other"><label for="other" required>Other</label>
             </div>
             <div class="form-group">
                 <label for="date_dob">Date of Birth</label>
-                <input type="date" name="date_dob" id="date_dob">
+                <input type="date" name="date_dob" id="date_dob" required>
             </div>
             <div class="form-group">
                 <label for="sel_district">Profession</label>
-                <select name="sel_profession" id="">
+                <select name="sel_profession" id="" required>
                     <option value="">---Select---</option>
                     {% for p in profession_data %}
                     <option value="{{p.id}}">{{p.profession.profession_name}}</option>
@@ -60,11 +59,19 @@
             </div>
             <div class="form-group">
                 <label for="txt_name">Specification</label>
-                <input type="text" name="txt_specification" id="">
+                <input type="text" name="txt_specification" id="" required>
+            </div>
+            <div class="form-group">
+                <label for="txt_fees">Consulting Fees</label>
+                <input type="text" name="txt_fees" id="" required>
+            </div>
+            <div class="form-group">
+                <label for="txt_about">About You</label>
+                <textarea name="txt_about" id="txt_about" cols="30" rows="5" required></textarea>
             </div>
             <div class="form-group">
                 <label for="sel_district">District</label>
-                <select name="sel_district" id="sel_district">
+                <select name="sel_district" id="sel_district" required>
                     <option value="">---Select---</option>
                     {% for i in districtdata %}
                     <option value="{{i.id}}">{{i.district.district_name}}</option>
@@ -73,13 +80,13 @@
             </div>
             <div class="form-group">
                 <label for="sel_place">Place</label>
-                <select name="sel_place" id="sel_place">
+                <select name="sel_place" id="sel_place" required>
                     <option value="">---Select---</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="txt_password">Password</label>
-                <input type="password" name="txt_password" id="txt_password">
+                <input type="password" name="txt_password" id="txt_password" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Register">

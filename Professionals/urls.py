@@ -25,4 +25,14 @@ urlpatterns = [
 
     path('Post/',views.post,name="post"),
 
+    path('chat/<str:id>',views.chat,name="chat"),
+    path('ajaxchat/',views.ajaxchat,name="ajaxchat"),
+    path('ajaxchatview/',views.ajaxchatview,name="ajaxchatview"),
+    path('clearchat/',views.clearchat,name="clearchat"),
+
+    path('endsession/<str:id>',views.endsession,name="endsession"),
+
+
+    
+
 ]
