@@ -1,3 +1,7 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,12 @@
 </head>
 <body>
     <br><br><br><br>
-    <h1 align="center"><b>PROFESSIONAL FEEDBACK</b></h1>
+    <h1 ><b>PROFESSIONAL FEEDBACK</b></h1>
     <form action="" method="post">
         {% csrf_token %}
-        <table align="center" border="5">
+        <div class="card-box">
+            <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
                 <th>Sl.No</th>
                 <th>Name</th>
@@ -26,10 +32,12 @@
             </tr>
             {% endfor %}
         </table>
+        </div></div>
         <br><br><br>
-        <h1 align="center"><b>USER FEEDBACK</b></h1>
-
-        <table align="center" border="5">
+        <h1><b>USER FEEDBACK</b></h1>
+        <div class="card-box">
+            <div class="card-block">
+        <table class="table table-bordered mb-0">
             <tr>
                 <th>Sl.No</th>
                 <th>Name</th>
@@ -45,6 +53,8 @@
             </tr>
             {% endfor %}
         </table>
+        </div></div>
     </form>
 </body>
 </html>
+{% endblock content %}

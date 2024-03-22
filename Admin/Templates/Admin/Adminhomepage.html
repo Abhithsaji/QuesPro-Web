@@ -21,7 +21,7 @@
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="index.html" class="logo">
 					<img src="{% static 'Admin/assets/img/logo.png' %}" width="35" height="35" alt=""> <span>QuesPro</span>
 				</a>
 			</div>
@@ -32,7 +32,7 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href=""><i class="fa-solid fa-square-plus"></i> <span>Post</span></a>
+                            <a href="{% url 'webadmin:adminhomepage' %}"><i class="fa-solid fa-square-plus"></i> <span>Post</span></a>
                         </li>
                         <li>
                             <a href="{% url 'webadmin:district' %}"><i class="fa-solid fa-globe"></i> <span>District</span></a>
@@ -71,38 +71,72 @@
                 </div>
             </div>
         </div>
-        <div class="page-wrapper">
-        <div>
-            <div>
-                <span>Posts</span>
-            </div>
+        <div class="card-title">
+            <span><b>POST</b></span>
+        </div>
+        <div class="card-container">
             {% for i in postdata %}
-            <div>
-                <img src="{{i.professional.professional_photo}}" alt="" width="20px" height="20px">  {{i.professional.professional_name}}
-            </div>
-            <div>
-                {{i.post.post_date}}
-            </div>
-            <div>
+            <div class="card">
+              <div>
+                <img src="{{i.professional.professional_photo}}" alt="" width="20px" height="20px">
+                <span>{{i.professional.professional_name}}</span>
+              </div>
+              <div>{{i.post.post_date}}</div>
+              <div>
                 <img src="{{i.post.post_url}}" alt="" width="100px" height="100px">
-            </div>
-            <div>
-                {{i.post.post_caption}}
-            </div>
-            <div>
+              </div>
+              <div>{{i.post.post_caption}}</div>
+              <div>
                 <a href="{% url 'webadmin:delpost' i.id %}">Delete</a>
+              </div>
             </div>
             {% endfor %}
         </div>
+          
 
     <div class="sidebar-overlay" data-reff=""></div>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/Chart.bundle.js"></script>
-    <script src="assets/js/chart.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="{% static 'Admin/assets/js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'Admin/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'Admin/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Admin/assets/js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'Admin/assets/js/Chart.bundle.js' %}"></script>
+    <script src="{% static 'Admin/assets/js/chart.js' %}"></script>
+    <script src="{% static 'Admin/assets/js/app.js' %}"></script>
 
 </body>
 </html>
+<style>
+    .card-title{
+        padding-left: 17%;
+        padding-top: 5%;
+        font-size: 30px;
+        color: #666666;
+    }
+    .card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    gap: 2rem;
+    padding-left: 10%;
+    padding-top: 1%;
+  }
+  
+  .card {
+	width: calc(20% - 10px);
+	margin-bottom: 20px;
+	background-color: #ffffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	box-sizing: border-box;
+  }
+  
+  .card > div {
+	margin-bottom: 10px;
+  }
+  
+  .card img {
+	margin-right: 10px;
+  }
+</style>

@@ -125,12 +125,12 @@ def newrequest(request):
 def acceptrequest(request,id):
     data = {"rstatus":1}
     db.collection("tbl_request").document(id).update(data)
-    return redirect("webprofessionals:newrequest")
+    return redirect("webprofessionals:homepageprofessional")
 
 def rejectrequest(request,id):
     data = {"rstatus":2}
     db.collection("tbl_request").document(id).update(data)
-    return redirect("webprofessionals:newrequest")
+    return redirect("webprofessionals:homepageprofessional")
 
 def acceptedrequest(request):
     pid = request.session["pid"]
@@ -162,7 +162,7 @@ def viewappoinments(request):
         user = db.collection("tbl_user").document(data["user_id"]).get().to_dict()
         appoinment_data.append({"appoinment":data,"id":i.id,"userdata":user})
 
-    aappoinment = db.collection("tbl_appoinment").where("professional_id","==",request.session["pid"]).where("astatus","!=",0).where("astatus",">=", 3).stream()
+    aappoinment = db.collection("tbl_appoinment").where("professional_id","==",request.session["pid"]).where("astatus","!=",2).where("astatus",">=",1).stream()
     aappoinment_data = []
     for a in aappoinment:
         adata = a.to_dict()
@@ -211,6 +211,11 @@ def post(request):
         return redirect("webprofessionals:post")
     else:
         return render(request,"Professionals/Posts.html",{"postdata":post_data})
+
+def delpost(request,id):
+    post = db.collection("tbl_post").document(id).delete()
+    return redirect("webprofessionals:post")
+
 
 def chat(request,id):
     app = db.collection("tbl_appoinment").document(id).get().to_dict()

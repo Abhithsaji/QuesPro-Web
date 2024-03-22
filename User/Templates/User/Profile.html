@@ -1,40 +1,78 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #ebebeb;
+            width: fit-content;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body><br><br><br><br>
     <h1 align="center"><b>PROFILE</b></h1>
-    <form action="" method="post">
-        <table align="center" border="4">
-            <tr>
-                <td colspan="2" align="center"><img src="{{user.photo_url}}" alt="Profile Picture" width="200px" height="200px"></td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>{{user.user_name}}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>{{user.user_email}}</td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td>{{user.user_contact}}</td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td>{{user.user_address}}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'webuser:editprofile' %}">Edit Profile</a></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'webuser:changepassword' %}">Change Password</a></td>
-            </tr>
-        </table>
-    </form>
+    <br>
+    <div class="main">
+        <div class="sub">
+            <div><a href="{{user.photo_url}}"><img src="{{user.photo_url}}" alt="" width="200px"></a></div>
+            <div>{{user.user_name}}</div>
+            <div>{{user.user_email}}</div>
+            <div>{{user.user_contact}}</div>
+            <div>{{user.user_address}}</div>
+            <div><a href="{% url 'webuser:editprofile' %}">Edit Profile</a></div>
+            <div><a href="{% url 'webuser:changepassword' %}">Change Password</a></div>
+        </div>
+    </div>
+        </form>
+</div>
 </body>
 </html>
+{% endblock content %}
+
+<style>
+    
+    .card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    gap: 2rem;
+    padding-left: 10%;
+    padding-top: 1%;
+  }
+  
+  .card {
+	width: calc(20% - 10px);
+	margin-bottom: 20px;
+	background-color: #ffffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	box-sizing: border-box;
+  }
+  
+  .card > div {
+	margin-bottom: 10px;
+  }
+  
+  .card img {
+	margin-right: 10px;
+  }
+</style>
+</style>

@@ -24,6 +24,7 @@ urlpatterns = [
     path('rejectappoinment/<str:id>',views.rejectappoinment,name="rejectappoinment"),
 
     path('Post/',views.post,name="post"),
+    path('delpost/<str:id>',views.delpost,name="delpost"),
 
     path('chat/<str:id>',views.chat,name="chat"),
     path('ajaxchat/',views.ajaxchat,name="ajaxchat"),

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table align="center" width="100%" height="50px">
+            <tr align="center">
+                <td><a href="{% url 'webuser:profile' %}"> Profile</a></td>
+                <td><a href="{% url 'webuser:searchprofessionals' %}">Search Professionals</a></td>
+                <td><a href="{% url 'webuser:following' %}">Following</a></td>
+                <td><a href="{% url 'webuser:viewappoinment' %}">Appoinment Status</a></td>
+                <td><a href="{% url 'webuser:post' %}">Posts</a></td>
+                <td><a href="{% url 'webuser:complaints' %}"> Complaints</a></td>
+                <td><a href="{% url 'webuser:feedback' %}"> Feedback</a></td>
+                <td>Logout</td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

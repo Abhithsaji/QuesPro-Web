@@ -1,3 +1,6 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +10,13 @@
 </head>
 <body>
     <br><br><br>
-    <h1 align="center"><b>REJECTED PROFESSIONALS</b></h1>
+    <h1><b>REJECTED PROFESSIONALS</b></h1>
     <form action="" method="post">
         {% csrf_token %}
+        <div class="card-box">
+            <div class="card-block">
         <table align="center" border="5" width="95%" height="30px">
-            <tr align="center">
+            <tr class="table table-bordered mb-0">
                 <th>Sl.No</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -45,3 +50,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}

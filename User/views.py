@@ -161,7 +161,7 @@ def sendrequest(request,id):
     return redirect("webuser:searchprofessionals")
 
 def following(request):
-    requests = db.collection("tbl_request").where("rstatus","==",0).stream()
+    requests = db.collection("tbl_request").where("rstatus","==",0).where("user_id","==",request.session["uid"]).stream()
     request_data = []
     for i in requests:
         data = i.to_dict()
@@ -169,7 +169,7 @@ def following(request):
         profession = db.collection("tbl_profession").document(pro["profession_id"]).get().to_dict()
         request_data.append({"requests":data,"id":i.id,"professional":pro,"profession":profession})
 
-    accepted = db.collection("tbl_request").where("rstatus","==",1).stream()
+    accepted = db.collection("tbl_request").where("rstatus","==",1).where("user_id","==",request.session["uid"]).stream()
     accepted_data = []
     for j in accepted:
         data = j.to_dict()
@@ -177,7 +177,7 @@ def following(request):
         aprofession = db.collection("tbl_profession").document(apro["profession_id"]).get().to_dict()
         accepted_data.append({"accepted":data,"id":j.id,"aprofessional":apro,"aprofession":aprofession})
 
-    rejected = db.collection("tbl_request").where("rstatus","==",2).stream()
+    rejected = db.collection("tbl_request").where("rstatus","==",2).where("user_id","==",request.session["uid"]).stream()
     rejected_data = []
     for k in rejected:
         data = k.to_dict()
