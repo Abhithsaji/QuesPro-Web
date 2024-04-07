@@ -18,6 +18,11 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
@@ -66,6 +71,9 @@
                         </li>
                         <li>
                             <a href="{% url 'webadmin:feedback' %}"><i class="fa-regular fa-comments"></i> <span>Feedbacks</span></a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></a>
                         </li>
                     </ul>
                 </div>

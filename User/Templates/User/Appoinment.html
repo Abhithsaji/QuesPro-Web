@@ -1,3 +1,7 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +9,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #ebebeb;
+            width: fit-content;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <br><br><br><br><br>
     <form action="" method="post">
         {% csrf_token %}
+        <div class="main">
+            <div class="sub">
         <table align="center" border="1">
             <tr>
                 <td>Date</td>
@@ -31,9 +54,11 @@
                 <td colspan="2" align="center"><input type="submit" value="Book Now"></td>
             </tr>
         </table>
+        </div></div>
     </form>
 </body>
 </html>
+{% endblock content %}
 <script type="text/javascript">
     $(function(){
         var dtToday = new Date();

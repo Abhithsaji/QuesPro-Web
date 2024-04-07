@@ -1,3 +1,7 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,12 +122,12 @@
                     calc( 0*var(--w)) 0 #000,calc(-1*var(--w)) 0 #000,calc(-2*var(--w)) 0 #000,calc(-3*var(--w)) 0 #000,calc(-4*var(--w)) 0 #000, 
                     calc(-5*var(--w)) 0 #000,calc(-6*var(--w)) 0 #000,calc(-7*var(--w)) 0 #000,calc(-8*var(--w)) 0 #000,calc(-9*var(--w)) -10px #000}
             }
-            hr {
+            /* hr {
                 border: 1px solid #e3e3e3;
                 width: 546px;
                 margin-top: 20px;
                 margin-bottom: 20px;
-            }
+            } */    
     </style>
 </head>
 <div class="loader-con" id="loader-data">
@@ -184,3 +188,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}

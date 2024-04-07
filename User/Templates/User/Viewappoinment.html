@@ -1,14 +1,37 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #ebebeb;
+            width: fit-content;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <br><br><br><br><br>
     <form action="" method="post">
         {% csrf_token %}
+    <div class="main">
+        <div class="sub">
         <table align="center" border="1">
             <tr align="center">
                 <th>Sl.No</th>
@@ -42,6 +65,8 @@
             </tr> 
             {% endfor %}           
         </table>
+    </div></div>
     </form>
 </body>
 </html>
+{% endblock content %}

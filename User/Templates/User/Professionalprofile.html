@@ -1,13 +1,36 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .sub {
+            padding: 20px;
+            background-color: #ebebeb;
+            width: fit-content;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body><br><br><br><br><br><br>
     <form action="" method="post">
         {% csrf_token %}
+        <div class="main">
+            <div class="sub">
         <table  align="center"  border="2">
             <tr align="center">
                 <td><img src="{{professionaldata.professional_photo}}" alt="" width="150px"></td>
@@ -34,7 +57,9 @@
                 <td><b>About : </b>{{professionaldata.professional_about}}</td>
             </tr>
         </table>
+        </div></div>
         <h5 align="center">Want to chat? <a href="{% url 'webuser:sendappoinment' id %}">Book an appinment.</a></h5>
     </form>
 </body>
 </html>
+{% endblock content %}

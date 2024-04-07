@@ -152,7 +152,7 @@ def ajaxprofession(request):
     for i in professionals:
         data = i.to_dict()
         pro = db.collection("tbl_profession").document(data["profession_id"]).get().to_dict()
-        prof_data.append({"professional":data,"id":i.id,"pro":pro})
+        prof_data.append({"professional":data,"id":i.id,"pro":pro,"condition":requestcheck(i.id,request.session["uid"]),})
     return render(request,"User/Ajaxprofessional.html",{"professionalsdata":prof_data})
 
 def sendrequest(request,id):

@@ -170,13 +170,18 @@ def updatecomptype(request,id):
         return render(request,"Admin/Complainttype.html",{"comptype_data":comptype})
 
 def adminhomepage(request):
-    post = db.collection("tbl_post").stream()
-    post_data = []
-    for i in post:
-        data = i.to_dict()
-        prof = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
-        post_data.append({"post":data,"id":i.id,"professional":prof})
-    return render(request,"Admin/Adminhomepage.html",{"postdata":post_data})
+    if 'aid' in request.session:
+        post = db.collection("tbl_post").stream()
+        post_data = []
+        for i in post:
+            data = i.to_dict()
+            prof = db.collection("tbl_professional").document(data["professional_id"]).get().to_dict()
+            post_data.append({"post":data,"id":i.id,"professional":prof})
+        return render(request,"Admin/Adminhomepage.html",{"postdata":post_data})
+    else:
+        return redirect("webguest:login")
+
+    
 
 # VIEW New User
 
