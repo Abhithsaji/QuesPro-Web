@@ -32,6 +32,7 @@ urlpatterns = [
     path('clearchat/',views.clearchat,name="clearchat"),
 
     path('endsession/<str:id>',views.endsession,name="endsession"),
+    path('logout/', views.logout, name='logout'),
 
 
     

@@ -30,7 +30,10 @@ sd = firebase.storage()
 
 
 def homepage(request):
-    return render(request,"User/Userhomepage.html")
+    if 'uid' in request.session:
+        return render(request,"User/Userhomepage.html")
+    else:
+        return redirect("webguest:login")
 
 def profile(request):
     user = db.collection("tbl_user").document(request.session["uid"]).get().to_dict()
@@ -334,3 +337,10 @@ def clearchat(request):
     for i2 in chat_data2:
         i2.reference.delete()
     return render(request,"User/ClearChat.html",{"msg":"Chat Cleared Sucessfully....."})
+
+def logout(request):
+    if 'uid' in request.session:
+        request.session.pop("uid")
+        return redirect("webguest:login")
+    else:
+        return redirect("webguest:login")

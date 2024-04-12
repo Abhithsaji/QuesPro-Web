@@ -2,6 +2,8 @@ from django.urls import path,include
 from Admin import views
 app_name = 'webadmin'
 
+
+
 urlpatterns = [
     path('District/',views.district,name="district"),
 
@@ -41,5 +43,6 @@ urlpatterns = [
     
     path('Feedback/',views.feedback,name="feedback"),
     path('delpost/<str:id>',views.delpost,name="delpost"),
+    path('logout/', views.logout, name='logout'),
 
 ]

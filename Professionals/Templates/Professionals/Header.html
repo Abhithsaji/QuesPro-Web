@@ -64,13 +64,12 @@
         <![endif]-->
 	
 		<!--welcome-hero start -->
-		<section id="home" class="welcome-hero">
 
 			<!-- top-area Start -->
 			<div class="top-area">
 				<div class="header-area">
 					<!-- Start Navigation -->
-				    <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000" >
+				    <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000" style="background-color: black;">
 
                         <div class="container">
                     
@@ -85,30 +84,28 @@
                             <!-- End Header Navigation -->
                     
                             <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu" style="background-color: black;">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li class="active"><a href="{% url 'webprofessionals:homepageprofessional' %}">home</a></li>
-                                    <li class=""><a href="{% url 'webprofessionals:profile' %}">Profile</a></li>
+                                    <li class="active"><a href="{% url 'webuser:homepage' %}">home</a></li>
+                                    <li class=""><a href="{% url 'webuser:profile' %}">Profile</a></li>
+                                    <li class=""><a href="{% url 'webuser:searchprofessionals' %}">Search Professionals</a></li>
                                     <!-- <li class=""><a href="{% url 'webuser:searchprofessionals' %}">Search Professionals</a></li> -->
-                                    <li class=""><a href="{% url 'webprofessionals:newrequest' %}">Requests</a></li>
-                                    <li class=""><a href="{% url 'webprofessionals:acceptedrequest' %}">Followers</a></li>
-                                    <li class=""><a href="{% url 'webprofessionals:rejectedrequest' %}">Waiting List</a></li>
-                                    <li class=""><a href="{% url 'webprofessionals:viewappoinments' %}">Appoinments</a></li>
-
+                                    <li class=""><a href="{% url 'webuser:following' %}">Following</a></li>
+                                    <li class=""><a href="{% url 'webuser:viewappoinment' %}">View Appointments</a></li>
+                                    <li class=""><a href="{% url 'webuser:post' %}">Post</a></li>
 
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <span class="caret"></span></a>
                                         <ul class="dropdown-menu" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 0.25rem; padding: 0.5rem;">
                                             <li style="padding: 0;">
-                                                <a href="{% url 'webprofessionals:complaints' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Complaints</a>
+                                                <a href="{% url 'webuser:complaints' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Complaints</a>
                                             </li>
                                             <li style="padding: 0;">
-                                                <a href="{% url 'webprofessionals:feedback' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Feedback</a>
+                                                <a href="{% url 'webuser:feedback' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Feedback</a>
                                             </li>
                                         </ul>
                                         
                                     </li>
-                                    <li class=""><a href="{% url 'webuser:logout' %}">Logout</a></li>
                                 </ul><!--/.nav -->
                             </div><!-- /.navbar-collapse -->
                         </div><!--/.container-->
@@ -119,73 +116,20 @@
 
 			</div><!-- /.top-area-->
 			<!-- top-area End -->
+        <style>
+            .gap-style{
+                margin-top: 100px;
+                margin-bottom: 100px;
+            }
+        </style>
+        <div class="gap-style">
+            {% block content %}
 
-			<div class="container">
-				<div class="welcome-hero-txt">
-					<h2>Unlock your full potential with our diverse team of skilled professionals.</h2>
-					<p>
-						From education to entrepreneurship, we've got you covered with our versatile advisors. 
-					</p>
-                    <a href="{% url 'webprofessionals:post' %}"><button class="welcome-btn animated fadeInDown" onclick="window.location.href=''" style="opacity: 0;">Add Post</button></a>
-					
-				</div>
-			</div>
+            {% endblock content %}
+        </div>    
 
-			
 
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
-
-		<!--service start -->
-		<section id="service" class="service">
-			<div class="container">
-				<div class="service-content">
-					<div class="row">
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<div class="single-service-icon">
-									<i class="flaticon-car"></i>
-								</div>
-								<h2><a href="#">Largest Team<span> of</span> Advisors</a></h2>
-								<p>
-									Teke valuable advise from our professionals.  
-								</p>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<div class="single-service-icon">
-									<i class="flaticon-car-repair"></i>
-								</div>
-								<h2><a href="#">Efficient Chat Facility</a></h2>
-								<p>
-									Chat with our whenever you want, whereever you want.  
-								</p>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<div class="single-service-icon">
-									<i class="flaticon-car-1"></i>
-								</div>
-								<h2><a href="#">24/7 Customer support </a></h2>
-								<p>
-									Our team is with you for everything, every time.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!--/.container-->
-
-		</section><!--/.service-->
-		<!--service end-->
-
-		<!--blog start -->
-		<section id="blog" class="blog"></section><!--/.blog-->
-		<!--blog end -->
-
-		<!--contact start-->
+            <!--contact start-->
 		<footer id="contact"  class="contact">
 			<div class="container">
 				<div class="footer-top">

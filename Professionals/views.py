@@ -29,7 +29,10 @@ sd = firebase.storage()
 db = firestore.client()
 
 def homepage(request):
-    return render(request,"Professionals/Homepageprofessional.html")
+    if 'pid' in request.session:
+        return render(request,"Professionals/Homepageprofessional.html")
+    else:
+        return redirect("webguest:login")
 
 def profile(request):
     professional = db.collection("tbl_professional").document(request.session['pid']).get().to_dict()
@@ -259,3 +262,10 @@ def clearchat(request):
 def endsession(request,id):
     db.collection("tbl_appoinment").document(id).update({"astatus":4})
     return redirect("webprofessionals:viewappoinments")
+
+def logout(request):
+    if 'pid' in request.session:
+        request.session.pop("pid")
+        return redirect("webguest:login")
+    else:
+        return redirect("webguest:login")

@@ -379,3 +379,9 @@ def delpost(request,id):
     post = db.collection("tbl_post").document(id).delete()
     return redirect("webadmin:adminhomepage")
 
+def logout(request):
+    if 'aid' in request.session:
+        request.session.pop("aid")
+        return redirect("webguest:login")
+    else:
+        return redirect("webguest:login")
