@@ -86,22 +86,22 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu" style="background-color: black;">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li class="active"><a href="{% url 'webuser:homepage' %}">home</a></li>
-                                    <li class=""><a href="{% url 'webuser:profile' %}">Profile</a></li>
-                                    <li class=""><a href="{% url 'webuser:searchprofessionals' %}">Search Professionals</a></li>
+                                    <li class="active"><a href="{% url 'webprofessionals:homepageprofessional' %}">home</a></li>
+                                    <li class=""><a href="{% url 'webprofessionals:profile' %}">Profile</a></li>
+                                    <li class=""><a href="{% url 'webprofessionals:newrequest' %}">Requests</a></li>
                                     <!-- <li class=""><a href="{% url 'webuser:searchprofessionals' %}">Search Professionals</a></li> -->
-                                    <li class=""><a href="{% url 'webuser:following' %}">Following</a></li>
-                                    <li class=""><a href="{% url 'webuser:viewappoinment' %}">View Appointments</a></li>
-                                    <li class=""><a href="{% url 'webuser:post' %}">Post</a></li>
+                                    <li class=""><a href="{% url 'webprofessionals:acceptedrequest' %}">Followers</a></li>
+                                    <li class=""><a href="{% url 'webprofessionals:rejectedrequest' %}">Waiting List</a></li>
+                                    <li class=""><a href="{% url 'webprofessionals:viewappoinments' %}">Appoinments</a></li>
 
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <span class="caret"></span></a>
                                         <ul class="dropdown-menu" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 0.25rem; padding: 0.5rem;">
                                             <li style="padding: 0;">
-                                                <a href="{% url 'webuser:complaints' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Complaints</a>
+                                                <a href="{% url 'webprofessionals:complaints' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Complaints</a>
                                             </li>
                                             <li style="padding: 0;">
-                                                <a href="{% url 'webuser:feedback' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Feedback</a>
+                                                <a href="{% url 'webprofessionals:feedback' %}" style="display: block; padding: 0.5rem 1rem; color: #343a40; text-decoration: none;">Feedback</a>
                                             </li>
                                         </ul>
                                         

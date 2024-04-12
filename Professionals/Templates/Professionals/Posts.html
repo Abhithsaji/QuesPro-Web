@@ -1,3 +1,6 @@
+{% extends 'Professionals/Header.html' %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
     <style>
+        .sub {
+            background-color: #ebebeb;
+            width: max-content;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -57,6 +74,8 @@
     <h1 align="center">Add Post</h1>
     <br><form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="main">
+            <div class="sub">
         <table align="center">
             <tr>
                 <th>Select Photo</th>
@@ -70,6 +89,7 @@
                 <td colspan="2" align="center"><input type="submit"></td>
             </tr>
         </table>
+        </div></div>
         <br><br><br><br><br>
         <div class="card-container">
             {% for i in postdata %}
@@ -88,3 +108,5 @@
     </form>
 </body>
 </html>
+
+{% endblock content %}
