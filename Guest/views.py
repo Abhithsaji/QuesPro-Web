@@ -149,7 +149,7 @@ def login(request):
 
         # ADMIN 
          
-        if (email == "quesproservice@gmail.com") & (password == "Quesproservice1396"):
+        if (email == "quesproservice@gmail.com") & (password == "123456"):
             request.session["aid"] = 1
             return redirect("webadmin:adminhomepage")
         else:

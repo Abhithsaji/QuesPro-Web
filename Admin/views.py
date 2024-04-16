@@ -3,6 +3,13 @@ import firebase_admin
 from firebase_admin import auth,firestore,credentials
 import pyrebase
 from datetime import datetime
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib import messages
+from django.http import JsonResponse
+
+
+
 
 
 # Create your views here.
@@ -238,17 +245,36 @@ def newprofessionals(request):
         data = p.to_dict()
         pro = db.collection("tbl_profession").document(data["profession_id"]).get().to_dict()
         prof_data.append({"professional":data,"id":p.id,"prof_name":pro})
+
         return render(request,"Admin/Newprofessionals.html",{"profdata":prof_data})
     else:
         return render(request,"Admin/Newprofessionals.html")
 
 def aproveprofessionals(request,id):
     data = {"vstatus":1}
+    pro = db.collection("tbl_professional").document(id).get().to_dict()
+    email = pro["professional_email"]
+    name = pro["professional_email"]
+    send_mail(
+                'Registration Successfull', #subject
+                "\rHello " + str(name) +"\r\nYour Request for Registratsion as a professional at QuesPro is accepted, you can Login to our website now.\n Thank You \n QuesPro" ,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
     db.collection("tbl_professional").document(id).update(data)
     return redirect("webadmin:adminhomepage")
     
 def rejectprofessionals(request,id):
     data = {"vstatus":2}
+    pro = db.collection("tbl_professional").document(id).get().to_dict()
+    email = pro["professional_email"]
+    name = pro["professional_email"]
+    send_mail(
+                'Registration Rejected', #subject
+                "\rHello " + str(name) +"\r\nYour Request for Registration as a professional at QuesPro is Rejected due to some reasons, Check your details given in the registration and try again, \n Thank You \n QuesPro" ,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
     db.collection("tbl_professional").document(id).update(data)
     return redirect("webadmin:adminhomepage")
 
